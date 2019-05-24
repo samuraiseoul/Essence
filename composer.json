@@ -1,0 +1,21 @@
+{
+    "name": "samuraiseoul/essence",
+    "description": "Request Lifecycle Framework with no magic, and completely type safe",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Scott Lavigne",
+            "email": "scottlavigne28@gmail.com",
+            "homepage": "http://www.scottlavigne.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Essence\\" : "src/"
+        }
+    }
+}
