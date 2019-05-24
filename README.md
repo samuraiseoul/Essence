@@ -30,3 +30,27 @@ allowing other types of endpoints such as dynamically generated downloads, gener
 and normal static assets like javascript, images, and other html pages. 
 
 Later non rest based lifecycle management is planned to be added.
+
+This is the expected file structure
+```
+/root
+    - /app
+        - /Middleware
+            - /Preware
+            - /Postware
+        - Services
+        - ResponseFormats
+        - Endpoints
+        - Views (If using Twig or something to return responses)
+        - DB
+    - public
+        - api
+        - static
+            - img
+            - css(dist)
+            - js(dist)
+            - html(dist)
+    - js(src)
+    - vendor
+    - composer.json (Essence as a dependency)
+```
