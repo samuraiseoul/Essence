@@ -16,4 +16,4 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN composer install
 
-CMD ["which", "php"]
+CMD ["composer", "test"]
