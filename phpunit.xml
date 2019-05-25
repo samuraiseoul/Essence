@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit colors="true"
+    bootstrap="./vendor/autoload.php"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
+    convertWarningsToExceptions="false"
     processIsolation="false"
     stopOnFailure="false">
-
+    <testsuites>
+        <testsuite>
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+<!--    <extensions>-->
+<!--        <extension class="Essence\Hooks\BypassFinalHook"/>-->
+<!--    </extensions>-->
 </phpunit>
