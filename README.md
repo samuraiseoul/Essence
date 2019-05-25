@@ -111,6 +111,9 @@ Dependency Injection, Queues, and Command Line tooling. One of the nice things a
 is that it starts out needing the bare minimum, however, without an easy way to start projects
 in it, no one will start using it. 
 
+Additionally adding some kind of `.htaccess` magic or another for pretty urls seems like an 
+important step to being easily consumable. 
+
 ## Contributing
 
 To contribute, simply make an issue and pull request! As long as the code looks good and the 
