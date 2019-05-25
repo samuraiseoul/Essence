@@ -1,8 +1,10 @@
 <?php
 
 
-namespace Essence\Http;
+namespace Essence\Utilities;
 
+
+use BadMethodCallException;
 
 final class RestVerbs
 {
@@ -30,6 +32,6 @@ final class RestVerbs
 
     public function __construct()
     {
-        throw new \BadMethodCallException('HTTP REST Verb class should never be instantiated!');
+        throw new BadMethodCallException('HTTP REST Verb class should never be instantiated!');
     }
 }

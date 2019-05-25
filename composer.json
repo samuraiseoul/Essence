@@ -12,7 +12,9 @@
     ],
     "require": {
         "php" : "^7.3",
-        "ext-json": "*"
+        "ext-json": "*",
+        "psr/http-message": "^1.0",
+      "ext-apache": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.1",

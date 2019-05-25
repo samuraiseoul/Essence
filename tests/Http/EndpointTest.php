@@ -4,7 +4,7 @@ namespace Essence\Tests\Http;
 
 use DG\BypassFinals;
 use Essence\Http\Endpoint;
-use Essence\Http\EndpointRunner;
+use Essence\Http\EndpointHandler;
 use Essence\Http\Methods\Get;
 use Essence\Http\RestVerbs;
 use Essence\Request\MethodRequests\GetRequest;
@@ -25,8 +25,8 @@ class EndpointTest extends TestCase
         BypassFinals::enable();
         $mockRequest = $this->createMock(GetRequest::class)->method('getRestVerb')->willReturn(RestVerbs::GET);
 
-        /** @var EndpointRunner | MockObject $mockRunner */
-        $mockRunner = $this->createMock(EndpointRunner::class);
+        /** @var EndpointHandler | MockObject $mockRunner */
+        $mockRunner = $this->createMock(EndpointHandler::class);
         $mockRunner->method('getRequest')->with()->willReturn($mockRequest);
 
         $this->expectExceptionCode(200);
