@@ -7,11 +7,8 @@
     processIsolation="false"
     stopOnFailure="false">
     <testsuites>
-        <testsuite>
-            <directory>tests</directory>
+        <testsuite name="http">
+            <directory>tests/Http</directory>
         </testsuite>
     </testsuites>
-<!--    <extensions>-->
-<!--        <extension class="Essence\Hooks\BypassFinalHook"/>-->
-<!--    </extensions>-->
 </phpunit>

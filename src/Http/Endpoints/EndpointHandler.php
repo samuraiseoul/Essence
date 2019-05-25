@@ -30,7 +30,7 @@ final class EndpointHandler implements EndpointHandlerInterface
     private function processRequest(EssenceRequest  $request, Endpoint $endpoint) : EssenceResponse
     {
         $this->callPreware($endpoint, $request);
-        $response = $this->{strtolower($request->getRestVerb())}($request);
+        $response = $endpoint->{strtolower($request->getRestVerb())}($request);
         $this->callPostware($endpoint, $response);
         return $response;
     }
