@@ -90,6 +90,7 @@ Essence's request lifecycle framework. Currently the proposed structure is:
         - DB
     - public
         - api
+            - endpoints
         - static
             - img
             - css (dist)
