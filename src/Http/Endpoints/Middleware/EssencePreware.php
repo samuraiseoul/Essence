@@ -4,10 +4,9 @@
 namespace Essence\Http\Endpoints\Middleware;
 
 
-
-use Essence\Http\Messages\Request\EssenceRequest;
+use Essence\Http\Messages\Request\EssenceRequestInterface;
 
 interface EssencePreware
 {
-    public function handle(EssenceRequest $request) : void;
+    public function handle(EssenceRequestInterface $request) : void;
 }

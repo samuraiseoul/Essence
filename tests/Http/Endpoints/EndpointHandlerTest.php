@@ -4,8 +4,9 @@ namespace Essence\Tests\Http;
 
 use Essence\Http\Endpoints\EndpointHandler;
 use Essence\Http\Endpoints\Methods\Get;
-use Essence\Http\Messages\Request\EssenceRequest;
-use Essence\Http\Messages\Request\RequestEndpointValidationInterface;
+use Essence\Http\Messages\Request\EssenceRequestInterface;
+use Essence\Http\Messages\Request\RequestStartLine;
+use Essence\Http\Messages\Request\Validator\RequestEndpointValidationInterface;
 use Essence\Http\Messages\Response\EssenceResponse;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -25,15 +26,22 @@ class EndpointTest extends TestCase
     }
 
     /**
-     * @return EssenceRequest|MockObject
+     * @return EssenceRequestInterface|MockObject
      * @throws ReflectionException
      */
     public function createRequestMock()
     {
-        /** @var EssenceRequest | MockObject $mockEssenceRequest */
-        $mockEssenceRequest = $this->createMock(EssenceRequest::class);
-        $mockEssenceRequest->method('getRestVerb')->willReturn('GET');
+        /** @var EssenceRequestInterface | MockObject $mockEssenceRequest */
+        $mockEssenceRequest = $this->createMock(EssenceRequestInterface::class);
+        $mockEssenceRequest->method('getStartLine')->willReturn($this->createStartLineMock());
         return $mockEssenceRequest;
+    }
+
+    public function createStartLineMock()
+    {
+        $mockStartLine = $this->createMock(RequestStartLine::class);
+        $mockStartLine->method('getHTTPMethod')->willReturn('GET');
+        return $mockStartLine;
     }
 
     /**

@@ -8,8 +8,8 @@ use Essence\Http\Endpoints\Hooks\HasPostware;
 use Essence\Http\Endpoints\Hooks\HasPreware;
 use Essence\Http\Endpoints\Middleware\EssencePostware;
 use Essence\Http\Endpoints\Middleware\EssencePreware;
-use Essence\Http\Messages\Request\EssenceRequest;
-use Essence\Http\Messages\Request\RequestEndpointValidationInterface;
+use Essence\Http\Messages\Request\EssenceRequestInterface;
+use Essence\Http\Messages\Request\Validator\RequestEndpointValidationInterface;
 use Essence\Http\Messages\Response\EssenceResponse;
 
 final class EndpointHandler implements EndpointHandlerInterface
@@ -22,27 +22,27 @@ final class EndpointHandler implements EndpointHandlerInterface
         $this->requestEndpointValidator = $requestEndpointValidator;
     }
 
-    final public function handleEndpoint(EssenceRequest $request, Endpoint $endpoint) : EssenceResponse {
+    final public function handleEndpoint(EssenceRequestInterface $request, Endpoint $endpoint) : EssenceResponse {
         $this->validateRequest($request, $endpoint);
         return $this->processRequest($request, $endpoint);
     }
 
-    private function processRequest(EssenceRequest  $request, Endpoint $endpoint) : EssenceResponse
+    private function processRequest(EssenceRequestInterface  $request, Endpoint $endpoint) : EssenceResponse
     {
         $this->callPreware($endpoint, $request);
-        $response = $endpoint->{strtolower($request->getRestVerb())}($request);
+        $response = $endpoint->{strtolower($request->getStartLine()->getHTTPMethod())}($request);
         $this->callPostware($endpoint, $response);
         return $response;
     }
 
-    private function validateRequest(EssenceRequest  $request, Endpoint $endpoint) : void
+    private function validateRequest(EssenceRequestInterface  $request, Endpoint $endpoint) : void
     {
         $this->requestEndpointValidator->endpointCanHandleRequest($endpoint, $request);
         // TODO: Add Request format validation like ResponseFormat and make such a thing required
         // $request->validateRequestContentForEndpoint($this);
     }
 
-    final private function callPreware(Endpoint $endpoint, EssenceRequest  $request) : void
+    final private function callPreware(Endpoint $endpoint, EssenceRequestInterface  $request) : void
     {
         if($endpoint instanceof HasPreware) {
             /** @var EssencePreware $preware */

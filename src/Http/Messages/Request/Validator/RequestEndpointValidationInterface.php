@@ -1,10 +1,11 @@
 <?php
 
 
-namespace Essence\Http\Messages\Request;
+namespace Essence\Http\Messages\Request\Validator;
 
 
 use Essence\Http\Endpoints\Endpoint;
+use Essence\Http\Messages\Request\EssenceRequestInterface;
 
 interface RequestEndpointValidationInterface
 {
