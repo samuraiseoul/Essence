@@ -9,7 +9,7 @@ use Essence\Http\Endpoints\Methods\RestVerb;
 
 class RequestEndpointValidator implements RequestEndpointValidationInterface
 {
-    public function endpointCanHandleRequest(Endpoint $endpoint, EssenceRequest $request): bool
+    public function endpointCanHandleRequest(Endpoint $endpoint, EssenceRequestInterface $request): bool
     {
         $expectedInterface = RestVerb::VERB_INTERFACE_MAP[$request->getRestVerb()];
         return $endpoint instanceof $expectedInterface;

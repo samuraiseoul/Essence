@@ -4,10 +4,21 @@
 namespace Essence\Http\Messages\Response;
 
 
-use Psr\Http\Message\ResponseInterface;
+
+use Essence\Http\Messages\Body;
+use Essence\Http\Messages\Headers;
+use Essence\Http\Messages\StartLine;
 
 interface EssenceResponse
 {
+    public function setStartLine(StartLine $startLine) : void;
+
+    public function setHeaders(Headers $headers) : void;
+
+    public function setBody(Body $body) : void;
+}
+
+/*
     public function setProtocol(string $protocol): EssenceResponse;
 
     public function setStatusCode(int $statusCode): EssenceResponse;
@@ -20,3 +31,4 @@ interface EssenceResponse
 
     public function toPsr7(): ResponseInterface;
 }
+*/

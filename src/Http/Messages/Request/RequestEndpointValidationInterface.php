@@ -8,5 +8,5 @@ use Essence\Http\Endpoints\Endpoint;
 
 interface RequestEndpointValidationInterface
 {
-    public function endpointCanHandleRequest(Endpoint $endpoint, EssenceRequest $request) : bool;
+    public function endpointCanHandleRequest(Endpoint $endpoint, EssenceRequestInterface $request) : bool;
 }

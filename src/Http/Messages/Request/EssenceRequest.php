@@ -1,30 +1,66 @@
 <?php
 
-
 namespace Essence\Http\Messages\Request;
 
 
+use Essence\Http\Messages\Body;
+use Essence\Http\Messages\Headers;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 
-interface EssenceRequest
+final class EssenceRequest implements EssenceRequestInterface
 {
-    public function getScheme(): string;
+    /** @var RequestStartLine */
+    private $startLine;
 
-    public function getHost(): string;
+    /** @var Headers */
+    private $headers;
 
-    public function getPort(): int;
+    /** @var Body */
+    private $body;
 
-    public function getPath() : string;
+    public function __construct(RequestStartLine $startLine, Headers $headers, Body $body)
+    {
+        $this->startLine = $startLine;
+        $this->headers = $headers;
+        $this->body = $body;
+    }
 
-    public function getRestVerb(): string;
+    public function getStartLine(): RequestStartLine
+    {
+        return $this->startLine;
+    }
 
-    public function getHeaders() : array;
+    public function getHeaders(): Headers
+    {
+        return $this->headers;
+    }
 
-    public function getQueryParameters() : array;
+    public function getBody(): Body
+    {
+        return $this->body;
+    }
 
-    public function getFormData() : array;
-
-    public function getBody() : string;
-
-    public function toPsr7(): RequestInterface;
+    public function toPsr7(): RequestInterface {
+        return new class() implements RequestInterface {
+            public function getProtocolVersion() {}
+            public function withProtocolVersion($version) {}
+            public function getHeaders() {}
+            public function hasHeader($name) {}
+            public function getHeader($name) {}
+            public function getHeaderLine($name) {}
+            public function withHeader($name, $value) {}
+            public function withAddedHeader($name, $value) {}
+            public function withoutHeader($name) {}
+            public function getBody() {}
+            public function withBody(StreamInterface $body) {}
+            public function getRequestTarget() {}
+            public function withRequestTarget($requestTarget) {}
+            public function getMethod() {}
+            public function withMethod($method) {}
+            public function getUri() {}
+            public function withUri(UriInterface $uri, $preserveHost = false) {}
+        };
+    }
 }
