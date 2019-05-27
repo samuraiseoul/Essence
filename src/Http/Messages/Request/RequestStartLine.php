@@ -10,7 +10,7 @@ interface RequestStartLine extends StartLine
 {
     public function getHTTPMethod() : string;
 
-    public function getRequestTarget() : string;
+    public function getRequestTarget() : RequestTarget;
 
     public function getHTTPVersion() : string;
 }
