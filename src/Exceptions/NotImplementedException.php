@@ -3,7 +3,9 @@
 namespace Essence\Exceptions;
 
 
-class NotImplementedException extends \RuntimeException
+use RuntimeException;
+
+class NotImplementedException extends RuntimeException
 {
 
 }
