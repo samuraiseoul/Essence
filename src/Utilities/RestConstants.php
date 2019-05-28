@@ -6,24 +6,28 @@ namespace Essence\Utilities;
 
 use BadMethodCallException;
 
-final class RestVerbs
+final class RestConstants
 {
     public const POST = 'POST';
     public const GET = 'GET';
     public const PUT = 'PUT';
     public const PATCH = 'PATCH';
     public const DELETE = 'DELETE';
-    public const OPTIONS = 'OPTIONS';
-    public const HEAD = 'HEAD';
-    public const CONNECT = 'CONNECT';
-    public const TRACE = 'TRACE';
 
     public const VERBS = [
         self::GET,
         self::PATCH,
         self::POST,
         self::PUT,
-        self::DELETE,
+        self::DELETE
+    ];
+
+    public const OPTIONS = 'OPTIONS';
+    public const HEAD = 'HEAD';
+    public const CONNECT = 'CONNECT';
+    public const TRACE = 'TRACE';
+
+    public const NOUNS = [
         self::OPTIONS,
         self::CONNECT,
         self::HEAD,
