@@ -5,7 +5,7 @@ namespace Essence\Tests\Http;
 use Essence\Http\Endpoints\EndpointHandler;
 use Essence\Http\Endpoints\Methods\Get;
 use Essence\Http\Messages\Request\RequestInterface;
-use Essence\Http\Messages\Request\RequestStartLine;
+use Essence\Http\Messages\Request\StartLine\RequestStartLine;
 use Essence\Http\Messages\Request\Validator\RequestEndpointValidationInterface;
 use Essence\Http\Messages\Response\Response;
 use PHPUnit\Framework\MockObject\MockObject;
