@@ -14,7 +14,11 @@ final class EssenceRequestHeaders implements RequestHeaders
     /** @param RequestHeader[] $headers */
     public function __construct(array $headers)
     {
-        $this->headers = $headers;
+        $mappedHeaders = [];
+        foreach ($headers as $header) {
+            $mappedHeaders[$header->getHeaderName()] = $header;
+        }
+        $this->headers = $mappedHeaders;
     }
 
     /**

@@ -25,6 +25,6 @@ final class EssenceRequestHeader implements RequestHeader
 
     public function getHeaderValue(): string
     {
-        return $this->getHeaderValue();
+        return $this->value;
     }
 }
