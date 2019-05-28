@@ -5,14 +5,9 @@ namespace Essence\Http\Messages\Request\Validator;
 
 
 use Essence\Http\Endpoints\Endpoint;
-use Essence\Http\Endpoints\Methods\RestVerb;
-use Essence\Http\Messages\Request\RequestInterface;
+use Essence\Http\Messages\Request\Request;
 
-class RequestEndpointValidator implements RequestEndpointValidationInterface
+interface RequestEndpointValidator
 {
-    public function endpointCanHandleRequest(Endpoint $endpoint, RequestInterface $request): bool
-    {
-        $expectedInterface = RestVerb::VERB_INTERFACE_MAP[$request->getStartLine()->getHTTPMethod()];
-        return $endpoint instanceof $expectedInterface;
-    }
+    public function endpointCanHandleRequest(Endpoint $endpoint, Request $request) : bool;
 }
