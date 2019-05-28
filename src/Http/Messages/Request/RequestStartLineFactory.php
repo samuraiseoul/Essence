@@ -4,7 +4,7 @@
 namespace Essence\Http\Messages\Request;
 
 
-class RequestStartLineFactory
+interface RequestStartLineFactory
 {
-
+    public function getStartLine() : RequestStartLine;
 }
