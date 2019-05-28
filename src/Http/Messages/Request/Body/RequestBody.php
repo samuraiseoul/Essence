@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Essence\Http\Messages\Request;
+namespace Essence\Http\Messages\Request\Body;
 
 
 use Essence\Http\Messages\Body;

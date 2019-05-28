@@ -5,6 +5,7 @@ namespace Essence\Http\Messages\Request;
 
 use Essence\Http\Messages\Body;
 use Essence\Http\Messages\Headers;
+use Essence\Http\Messages\Request\StartLine\RequestStartLine;
 use Psr\Http\Message\RequestInterface as PsrRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;

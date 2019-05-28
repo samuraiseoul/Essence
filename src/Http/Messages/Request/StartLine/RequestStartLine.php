@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Essence\Http\Messages\Request;
+namespace Essence\Http\Messages\Request\StartLine;
 
 
 use Essence\Http\Messages\StartLine;

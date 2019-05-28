@@ -1,13 +1,12 @@
 <?php
 
 
-namespace Essence\Http\Messages\Response;
+namespace Essence\Http\Messages\Response\Headers;
 
 
-use Essence\Http\Messages\Header;
 use Essence\Http\Messages\Headers;
 
 interface ResponseHeaders extends Headers
 {
-    public function addHeader(Header $header) : self;
+    public function addHeader(ResponseHeader $header) : self;
 }

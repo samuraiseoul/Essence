@@ -2,8 +2,8 @@
 
 namespace Essence\Http\Endpoints\Methods;
 
+use Essence\Helpers\Rest\RestConstants;
 use Essence\Http\Endpoints\Endpoint;
-use Essence\Utilities\RestConstants;
 
 interface RestVerb extends Endpoint
 {

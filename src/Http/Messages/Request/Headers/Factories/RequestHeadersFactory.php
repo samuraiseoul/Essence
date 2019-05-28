@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Essence\Http\Messages\Request;
+namespace Essence\Http\Messages\Request\Headers\Factories;
 
 
 use Essence\Http\Messages\Headers;

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Essence\Utilities;
+namespace Essence\Helpers\Rest;
 
 
 use BadMethodCallException;

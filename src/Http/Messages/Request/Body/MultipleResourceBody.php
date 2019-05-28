@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Essence\Http\Messages\Request;
+namespace Essence\Http\Messages\Request\Body;
 
 
 interface MultipleResourceBody extends RequestBody

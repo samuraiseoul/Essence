@@ -1,8 +1,10 @@
 <?php
 
 
-namespace Essence\Http\Messages\Request;
+namespace Essence\Http\Messages\Request\StartLine\Factories;
 
+
+use Essence\Http\Messages\Request\StartLine\RequestTarget;
 
 interface RequestTargetFactory
 {
