@@ -5,11 +5,11 @@ namespace Essence\Http\Messages\Request;
 
 use Essence\Http\Messages\Body;
 use Essence\Http\Messages\Headers;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\RequestInterface as PsrRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
-final class EssenceRequest implements EssenceRequestInterface
+final class Request implements RequestInterface
 {
     /** @var RequestStartLine */
     private $startLine;
@@ -42,8 +42,8 @@ final class EssenceRequest implements EssenceRequestInterface
         return $this->body;
     }
 
-    public function toPsr7(): RequestInterface {
-        return new class() implements RequestInterface {
+    public function toPsr7(): PsrRequestInterface {
+        return new class() implements PsrRequestInterface {
             public function getProtocolVersion() {}
             public function withProtocolVersion($version) {}
             public function getHeaders() {}

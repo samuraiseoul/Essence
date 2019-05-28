@@ -4,10 +4,10 @@ namespace Essence\Tests\Http;
 
 use Essence\Http\Endpoints\EndpointHandler;
 use Essence\Http\Endpoints\Methods\Get;
-use Essence\Http\Messages\Request\EssenceRequestInterface;
+use Essence\Http\Messages\Request\RequestInterface;
 use Essence\Http\Messages\Request\RequestStartLine;
 use Essence\Http\Messages\Request\Validator\RequestEndpointValidationInterface;
-use Essence\Http\Messages\Response\EssenceResponse;
+use Essence\Http\Messages\Response\Response;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -26,13 +26,13 @@ class EndpointTest extends TestCase
     }
 
     /**
-     * @return EssenceRequestInterface|MockObject
+     * @return RequestInterface|MockObject
      * @throws ReflectionException
      */
     public function createRequestMock()
     {
-        /** @var EssenceRequestInterface | MockObject $mockEssenceRequest */
-        $mockEssenceRequest = $this->createMock(EssenceRequestInterface::class);
+        /** @var RequestInterface | MockObject $mockEssenceRequest */
+        $mockEssenceRequest = $this->createMock(RequestInterface::class);
         $mockEssenceRequest->method('getStartLine')->willReturn($this->createStartLineMock());
         return $mockEssenceRequest;
     }
@@ -45,13 +45,13 @@ class EndpointTest extends TestCase
     }
 
     /**
-     * @return EssenceResponse|MockObject
+     * @return Response|MockObject
      * @throws ReflectionException
      */
     public function createResponseMock()
     {
-        /** @var EssenceResponse | MockObject $mockEssenceResponse */
-        $mockEssenceResponse = $this->createMock(EssenceResponse::class);
+        /** @var Response | MockObject $mockEssenceResponse */
+        $mockEssenceResponse = $this->createMock(Response::class);
         return $mockEssenceResponse;
     }
 

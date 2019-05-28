@@ -9,7 +9,7 @@ use Essence\Http\Messages\Body;
 use Essence\Http\Messages\Headers;
 use Essence\Http\Messages\StartLine;
 
-interface EssenceResponse
+interface Response
 {
     public function setStartLine(StartLine $startLine) : self;
 

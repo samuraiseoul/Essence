@@ -4,10 +4,10 @@
 namespace Essence\Http\Endpoints;
 
 
-use Essence\Http\Messages\Request\EssenceRequestInterface;
-use Essence\Http\Messages\Response\EssenceResponse;
+use Essence\Http\Messages\Request\RequestInterface;
+use Essence\Http\Messages\Response\Response;
 
 interface EndpointHandlerInterface
 {
-    public function handleEndpoint(EssenceRequestInterface $request, Endpoint $endpoint) : EssenceResponse;
+    public function handleEndpoint(RequestInterface $request, Endpoint $endpoint) : Response;
 }

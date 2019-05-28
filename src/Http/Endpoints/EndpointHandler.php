@@ -6,11 +6,11 @@ namespace Essence\Http\Endpoints;
 
 use Essence\Http\Endpoints\Hooks\HasPostware;
 use Essence\Http\Endpoints\Hooks\HasPreware;
-use Essence\Http\Endpoints\Middleware\EssencePostware;
-use Essence\Http\Endpoints\Middleware\EssencePreware;
-use Essence\Http\Messages\Request\EssenceRequestInterface;
+use Essence\Http\Endpoints\Middleware\Postware;
+use Essence\Http\Endpoints\Middleware\Preware;
+use Essence\Http\Messages\Request\RequestInterface;
 use Essence\Http\Messages\Request\Validator\RequestEndpointValidationInterface;
-use Essence\Http\Messages\Response\EssenceResponse;
+use Essence\Http\Messages\Response\Response;
 
 final class EndpointHandler implements EndpointHandlerInterface
 {
@@ -22,12 +22,12 @@ final class EndpointHandler implements EndpointHandlerInterface
         $this->requestEndpointValidator = $requestEndpointValidator;
     }
 
-    final public function handleEndpoint(EssenceRequestInterface $request, Endpoint $endpoint) : EssenceResponse {
+    final public function handleEndpoint(RequestInterface $request, Endpoint $endpoint) : Response {
         $this->validateRequest($request, $endpoint);
         return $this->processRequest($request, $endpoint);
     }
 
-    private function processRequest(EssenceRequestInterface  $request, Endpoint $endpoint) : EssenceResponse
+    private function processRequest(RequestInterface  $request, Endpoint $endpoint) : Response
     {
         $this->callPreware($endpoint, $request);
         $response = $endpoint->{strtolower($request->getStartLine()->getHTTPMethod())}($request);
@@ -35,27 +35,27 @@ final class EndpointHandler implements EndpointHandlerInterface
         return $response;
     }
 
-    private function validateRequest(EssenceRequestInterface  $request, Endpoint $endpoint) : void
+    private function validateRequest(RequestInterface  $request, Endpoint $endpoint) : void
     {
         $this->requestEndpointValidator->endpointCanHandleRequest($endpoint, $request);
         // TODO: Add Request format validation like ResponseFormat and make such a thing required
         // $request->validateRequestContentForEndpoint($this);
     }
 
-    final private function callPreware(Endpoint $endpoint, EssenceRequestInterface  $request) : void
+    final private function callPreware(Endpoint $endpoint, RequestInterface  $request) : void
     {
         if($endpoint instanceof HasPreware) {
-            /** @var EssencePreware $preware */
+            /** @var Preware $preware */
             foreach($endpoint->getPreware() as $preware) {
                 $preware->handle($request);
             }
         }
     }
 
-    final private function callPostware(Endpoint $endpoint, EssenceResponse $response) : void
+    final private function callPostware(Endpoint $endpoint, Response $response) : void
     {
         if($endpoint instanceof HasPostware) {
-            /** @var EssencePostware $postware */
+            /** @var Postware $postware */
             foreach($endpoint->getPostware() as $postware) {
                 $postware->handle($response);
             }

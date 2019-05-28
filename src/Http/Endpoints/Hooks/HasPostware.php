@@ -4,10 +4,10 @@
 namespace Essence\Http\Endpoints\Hooks;
 
 
-use Essence\Http\Endpoints\Middleware\EssencePostware;
+use Essence\Http\Endpoints\Middleware\Postware;
 
 interface HasPostware extends HasHook
 {
-    /** @return EssencePostware[] */
+    /** @return Postware[] */
     public function getPostware() : array;
 }

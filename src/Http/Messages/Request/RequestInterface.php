@@ -6,9 +6,9 @@ namespace Essence\Http\Messages\Request;
 
 use Essence\Http\Messages\Body;
 use Essence\Http\Messages\Headers;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\RequestInterface as PsrRequestInterface;
 
-interface EssenceRequestInterface
+interface RequestInterface
 {
     public function getStartLine() : RequestStartLine;
 
@@ -16,5 +16,5 @@ interface EssenceRequestInterface
 
     public function getBody() : Body;
 
-    public function toPsr7(): RequestInterface;
+    public function toPsr7(): PsrRequestInterface;
 }

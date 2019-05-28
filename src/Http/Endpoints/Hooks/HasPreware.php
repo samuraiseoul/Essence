@@ -2,10 +2,10 @@
 
 namespace Essence\Http\Endpoints\Hooks;
 
-use Essence\Http\Endpoints\Middleware\EssencePreware;
+use Essence\Http\Endpoints\Middleware\Preware;
 
 interface HasPreware extends HasHook
 {
-    /** @return EssencePreware[] */
+    /** @return Preware[] */
     public function getPreware() : array;
 }

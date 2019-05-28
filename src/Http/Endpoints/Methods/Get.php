@@ -2,10 +2,10 @@
 
 namespace Essence\Http\Endpoints\Methods;
 
-use Essence\Http\Messages\Request\EssenceRequestInterface;
-use Essence\Http\Messages\Response\EssenceResponse;
+use Essence\Http\Messages\Request\RequestInterface;
+use Essence\Http\Messages\Response\Response;
 
 interface Get extends RestVerb
 {
-    public function get(EssenceRequestInterface $request) : EssenceResponse;
+    public function get(RequestInterface $request) : Response;
 }
