@@ -11,11 +11,11 @@ use Essence\Http\Messages\StartLine;
 
 interface EssenceResponse
 {
-    public function setStartLine(StartLine $startLine) : void;
+    public function setStartLine(StartLine $startLine) : self;
 
-    public function setHeaders(Headers $headers) : void;
+    public function setHeaders(Headers $headers) : self;
 
-    public function setBody(Body $body) : void;
+    public function setBody(Body $body) : self;
 }
 
 /*
