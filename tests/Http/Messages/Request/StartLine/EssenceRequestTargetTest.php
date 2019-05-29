@@ -16,7 +16,13 @@ class EssenceRequestTargetTest extends TestCase
     const QUERY_PARAMETER_VALUE = 'fakeQueryParam';
 
     public function testGetPath() {
-        $requestTarget = new EssenceRequestTarget('fakepath/fakefile.php?', $this->getQueryParametersMock());
+        $requestTarget = new EssenceRequestTarget($this->getFakePath(), $this->getQueryParametersMock());
+        $this->assertEquals($this->getFakePath(), $requestTarget->getPath());
+    }
+
+    public function testQueryParameters() {
+        $requestTarget = new EssenceRequestTarget($this->getFakePath(), $this->getQueryParametersMock());
+        $this->assertEquals(self::QUERY_PARAMETER_VALUE, $requestTarget->getQueryStrings()->get(self::QUERY_PARAMETER_KEY));
     }
 
     /**
@@ -29,5 +35,13 @@ class EssenceRequestTargetTest extends TestCase
             ->with(self::QUERY_PARAMETER_KEY)
             ->willReturn(self::QUERY_PARAMETER_VALUE);
         return $queryParametersMock;
+    }
+
+    /**
+     * @return string
+     */
+    private function getFakePath(): string
+    {
+        return 'fakepath/fakefile.php?' . self::QUERY_PARAMETER_KEY . '=' . self::QUERY_PARAMETER_VALUE;
     }
 }
