@@ -10,7 +10,6 @@ use Essence\Http\Messages\Request\Body\RequestBody;
 
 final class EssenceRequestBodyFactory implements RequestBodyFactory
 {
-
     public function getRequestBody(): RequestBody
     {
         if($_POST || $_FILES) {

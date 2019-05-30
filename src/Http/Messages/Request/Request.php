@@ -7,7 +7,6 @@ namespace Essence\Http\Messages\Request;
 use Essence\Http\Messages\Request\Body\RequestBody;
 use Essence\Http\Messages\Request\Headers\RequestHeaders;
 use Essence\Http\Messages\Request\StartLine\RequestStartLine;
-use Psr\Http\Message\RequestInterface as PsrRequestInterface;
 
 interface Request
 {
