@@ -1,12 +1,11 @@
 <?php
 
 
-namespace Http\Messages\Response;
+namespace Essence\Http\Messages\Response;
 
 
 use Essence\Http\Messages\Response\Body\ResponseBody;
 use Essence\Http\Messages\Response\Headers\ResponseHeaders;
-use Essence\Http\Messages\Response\Response;
 use Essence\Http\Messages\Response\StartLine\ResponseStartLine;
 
 final class EssenceResponse implements Response

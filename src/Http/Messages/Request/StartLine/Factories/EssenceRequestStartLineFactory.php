@@ -17,6 +17,11 @@ final class EssenceRequestStartLineFactory implements RequestStartLineFactory
     /** @var RequestTargetFactory */
     private $requestTargetFactory;
 
+    public function __construct(RequestTargetFactory $requestTargetFactory)
+    {
+        $this->requestTargetFactory = $requestTargetFactory;
+    }
+
     public function getStartLine(): RequestStartLine
     {
         return $this->startLine ?? $this->startLine = $this->createStartLine();
@@ -40,7 +45,7 @@ final class EssenceRequestStartLineFactory implements RequestStartLineFactory
     private function createStartLine(): EssenceRequestStartLine
     {
         if($this->startLine) {
-            throw new BadMethodCallException("The start line has already been created!");
+            throw new BadMethodCallException('The start line has already been created!');
         }
         return new EssenceRequestStartLine($this->getMethod(), $this->getTarget(), $this->getVersion());
     }

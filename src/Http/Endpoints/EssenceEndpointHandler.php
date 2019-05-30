@@ -18,7 +18,7 @@ final class EssenceEndpointHandler implements EndpointHandler
         $this->requestEndpointValidator = $requestEndpointValidator;
     }
 
-    final public function handleEndpoint(Request $request, Endpoint $endpoint) : Response {
+    public function handleEndpoint(Request $request, Endpoint $endpoint) : Response {
         $this->validateRequest($request, $endpoint);
         return $this->processRequest($request, $endpoint);
     }

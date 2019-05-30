@@ -17,6 +17,11 @@ final class EssenceRequestTargetFactory implements RequestTargetFactory
     /** @var QueryParametersFactory */
     private $queryParametersFactory;
 
+    public function __construct(QueryParametersFactory $queryParametersFactory)
+    {
+        $this->queryParametersFactory = $queryParametersFactory;
+    }
+
     public function getRequestTarget(): RequestTarget
     {
         return $this->requestTarget ?? $this->requestTarget = $this->createEssenceRequestTarget();
