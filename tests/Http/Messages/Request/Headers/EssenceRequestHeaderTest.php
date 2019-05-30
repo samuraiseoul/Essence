@@ -9,15 +9,16 @@ use PHPUnit\Framework\TestCase;
 
 class EssenceRequestHeaderTest extends TestCase
 {
-    const HEADER_VALUE = 'headerValue';
-    const HEADER_NAME = 'headerName';
+    private const HEADER_VALUE = 'headerValue';
 
-    public function testNameGetter() {
+    private const HEADER_NAME = 'headerName';
+
+    public function testNameGetter() : void {
         $header = new EssenceRequestHeader(self::HEADER_NAME, self::HEADER_VALUE);
         $this->assertEquals(self::HEADER_NAME, $header->getHeaderName());
     }
 
-    public function testValueGetter() {
+    public function testValueGetter() : void {
         $header = new EssenceRequestHeader(self::HEADER_NAME, self::HEADER_VALUE);
         $this->assertEquals(self::HEADER_VALUE, $header->getHeaderValue());
     }

@@ -9,10 +9,11 @@ use PHPUnit\Framework\TestCase;
 
 class EssenceQueryParametersTest extends TestCase
 {
-    const KEY = 'key';
-    const VALUE = 'value';
+    private const KEY = 'key';
 
-    public function testGetQueryParameter() {
+    private const VALUE = 'value';
+
+    public function testGetQueryParameter() : void {
         $queryParameters = new EssenceQueryParameters([self::KEY => self::VALUE]);
         $this->assertEquals(self::VALUE, $queryParameters->get(self::KEY));
     }

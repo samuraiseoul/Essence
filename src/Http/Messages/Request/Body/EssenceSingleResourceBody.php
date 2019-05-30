@@ -6,8 +6,16 @@ namespace Essence\Http\Messages\Request\Body;
 
 final class EssenceSingleResourceBody implements SingleResourceBody
 {
+    /** @var string */
+    private $contents;
+
+    public function __construct(string $contents)
+    {
+        $this->contents = $contents;
+    }
+
     public function getContents(): string
     {
-        return file_get_contents('php://input');
+        return $this->contents;
     }
 }

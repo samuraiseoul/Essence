@@ -14,8 +14,8 @@ final class EssenceRequestBodyFactory implements RequestBodyFactory
     public function getRequestBody(): RequestBody
     {
         if($_POST || $_FILES) {
-            return new EssenceMultipleResourceBody();
+            return new EssenceMultipleResourceBody([$_POST, $_FILES]);
         }
-        return new EssenceSingleResourceBody();
+        return new EssenceSingleResourceBody(file_get_contents('php://input'));
     }
 }

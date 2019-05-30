@@ -15,19 +15,20 @@ class EssenceRequestStartLineTest extends TestCase
     private const VALID_VERB = 'GET';
 
     private const INVALID_VERB = 'OPTIONS';
-    const HTTP_VERSION = '1';
 
-    public function testGetHttpMethod() {
+    private const HTTP_VERSION = 'HTTP/1.0';
+
+    public function testGetHttpMethod() : void {
         $startLine = new EssenceRequestStartLine(self::VALID_VERB, $this->getMockRequestTarget(), self::HTTP_VERSION);
         $this->assertEquals(self::VALID_VERB, $startLine->getHTTPMethod());
     }
 
-    public function testHttpMethodValidator() {
+    public function testHttpMethodValidator() : void {
         $this->expectException(\InvalidArgumentException::class);
         new EssenceRequestStartLine(self::INVALID_VERB, $this->getMockRequestTarget(), self::HTTP_VERSION);
     }
 
-    public function testGetHttpVersion() {
+    public function testGetHttpVersion() : void {
         $startLine = new EssenceRequestStartLine(self::VALID_VERB, $this->getMockRequestTarget(), self::HTTP_VERSION);
         $this->assertEquals(self::HTTP_VERSION, $startLine->getHTTPVersion());
     }
@@ -38,7 +39,6 @@ class EssenceRequestStartLineTest extends TestCase
      */
     private function getMockRequestTarget()
     {
-        $requestTargetMock = $this->createMock(RequestTarget::class);
-        return $requestTargetMock;
+        return $this->createMock(RequestTarget::class);
     }
 }

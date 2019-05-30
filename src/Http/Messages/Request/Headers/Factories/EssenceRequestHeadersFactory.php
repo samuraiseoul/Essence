@@ -30,7 +30,7 @@ final class EssenceRequestHeadersFactory implements RequestHeadersFactory
     private function createEssenceRequestHeaders(): EssenceRequestHeaders
     {
         if($this->headers) {
-            throw new BadMethodCallException("Headers already instantiated!");
+            throw new BadMethodCallException('Headers already instantiated!');
         }
         return new EssenceRequestHeaders($this->getRequestHeaders());
     }

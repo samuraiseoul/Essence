@@ -10,6 +10,7 @@ use Essence\Http\Endpoints\Methods\RestVerb;
 use Essence\Http\Messages\Request\Request;
 use Essence\Http\Messages\Request\StartLine\RequestStartLine;
 use Essence\Http\Messages\Request\Validator\EssenceRequestEndpointValidator;
+use Essence\Http\Messages\StartLine;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -20,13 +21,13 @@ class EssenceRequestEndpointValidatorTest extends TestCase
 
     private const INVALID_VERB = RestConstants::POST;
 
-    public function testEndpointCanHandleRequest() {
+    public function testEndpointCanHandleRequest() : void {
         $validator = new EssenceRequestEndpointValidator();
         $isValid = $validator->endpointCanHandleRequest($this->createEndpointMock(), $this->createValidRequestMock());
         $this->assertTrue($isValid);
     }
 
-    public function testEndpointCanNotHandleRequest() {
+    public function testEndpointCanNotHandleRequest() : void {
         $validator = new EssenceRequestEndpointValidator();
         $isValid = $validator->endpointCanHandleRequest($this->createEndpointMock(), $this->createInvalidRequestMock());
         $this->assertFalse($isValid);
@@ -38,10 +39,14 @@ class EssenceRequestEndpointValidatorTest extends TestCase
      */
     private function createValidRequestMock() {
         $requestMock = $this->createMock(Request::class);
-        $requestMock->method('getStartLine')->willReturn($this->createvalidStartLineMock());
+        $requestMock->method('getStartLine')->willReturn($this->createValidStartLineMock());
         return $requestMock;
     }
 
+    /**
+     * @return MockObject | StartLine
+     * @throws ReflectionException
+     */
     private function createValidStartLineMock() {
         $startLineMock = $this->createMock(RequestStartLine::class);
         $startLineMock->method('getHTTPMethod')->willReturn(RestConstants::GET);
@@ -58,6 +63,10 @@ class EssenceRequestEndpointValidatorTest extends TestCase
         return $requestMock;
     }
 
+    /**
+     * @return MockObject | StartLine
+     * @throws ReflectionException
+     */
     private function createInvalidStartLineMock() {
         $startLineMock = $this->createMock(RequestStartLine::class);
         $startLineMock->method('getHTTPMethod')->willReturn(self::INVALID_VERB);

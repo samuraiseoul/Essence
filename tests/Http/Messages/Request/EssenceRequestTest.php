@@ -4,35 +4,32 @@
 namespace Essence\Tests\Http\Messages\Request;
 
 
-use Essence\Http\Messages\Body;
-use Essence\Http\Messages\Headers;
+use Essence\Http\Messages\Request\Body\RequestBody;
 use Essence\Http\Messages\Request\EssenceRequest;
+use Essence\Http\Messages\Request\Headers\RequestHeaders;
 use Essence\Http\Messages\Request\StartLine\RequestStartLine;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\RequestInterface;
 use ReflectionException;
 
 class EssenceRequestTest extends TestCase
 {
-    public function testPsrConversion() {
-        $request = new EssenceRequest($this->getMockStartLine(), $this->getMockHeaders(), $this->getMockBody());
-        $this->assertInstanceOf(RequestInterface::class, $request->toPsr7());
+    public function testGetStartLine() : void {
+        $startLine = $this->getMockStartLine();
+        $request = new EssenceRequest($startLine, $this->getMockHeaders(), $this->getMockBody());
+        $this->assertEquals($startLine, $request->getStartLine());
     }
 
-    public function testStartLineType() {
-        $request = new EssenceRequest($this->getMockStartLine(), $this->getMockHeaders(), $this->getMockBody());
-        $this->assertInstanceOf(RequestStartLine::class, $request->getStartLine());
+    public function testGetHeaders() : void {
+        $requestHeaders = $this->getMockHeaders();
+        $request = new EssenceRequest($this->getMockStartLine(), $requestHeaders, $this->getMockBody());
+        $this->assertEquals($requestHeaders, $request->getHeaders());
     }
 
-    public function testHeadersType() {
-        $request = new EssenceRequest($this->getMockStartLine(), $this->getMockHeaders(), $this->getMockBody());
-        $this->assertInstanceOf(Headers::class, $request->getHeaders());
-    }
-
-    public function testBodyType() {
-        $request = new EssenceRequest($this->getMockStartLine(), $this->getMockHeaders(), $this->getMockBody());
-        $this->assertInstanceOf(Body::class, $request->getBody());
+    public function testGetBody() : void {
+        $requestBody = $this->getMockBody();
+        $request = new EssenceRequest($this->getMockStartLine(), $this->getMockHeaders(), $requestBody);
+        $this->assertEquals($requestBody, $request->getBody());
     }
 
     /**
@@ -40,25 +37,22 @@ class EssenceRequestTest extends TestCase
      * @throws ReflectionException
      */
     private function getMockStartLine() {
-        $mockStartLine = $this->createMock(RequestStartLine::class);
-        return $mockStartLine;
+        return $this->createMock(RequestStartLine::class);
     }
 
     /**
-     * @return MockObject | Headers
+     * @return MockObject | RequestHeaders
      * @throws ReflectionException
      */
     private function getMockHeaders() {
-        $mockHeaders = $this->createMock(Headers::class);
-        return $mockHeaders;
+        return $this->createMock(RequestHeaders::class);
     }
 
     /**
-     * @return MockObject | Body
+     * @return MockObject | RequestBody
      * @throws ReflectionException
      */
     private function getMockBody() {
-        $mockBody = $this->createMock(Body::class);
-        return $mockBody;
+        return $this->createMock(RequestBody::class);
     }
 }

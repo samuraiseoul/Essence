@@ -12,15 +12,15 @@ use ReflectionException;
 
 class EssenceRequestTargetTest extends TestCase
 {
-    const QUERY_PARAMETER_KEY = 'fakeKey';
-    const QUERY_PARAMETER_VALUE = 'fakeQueryParam';
+    private const QUERY_PARAMETER_KEY = 'fakeKey';
+    private const QUERY_PARAMETER_VALUE = 'fakeQueryParam';
 
-    public function testGetPath() {
+    public function testGetPath() : void {
         $requestTarget = new EssenceRequestTarget($this->getFakePath(), $this->getQueryParametersMock());
         $this->assertEquals($this->getFakePath(), $requestTarget->getPath());
     }
 
-    public function testQueryParameters() {
+    public function testQueryParameters() : void {
         $requestTarget = new EssenceRequestTarget($this->getFakePath(), $this->getQueryParametersMock());
         $this->assertEquals(self::QUERY_PARAMETER_VALUE, $requestTarget->getQueryStrings()->get(self::QUERY_PARAMETER_KEY));
     }

@@ -14,8 +14,8 @@ final class EssenceQueryParameters implements QueryParameters
         $this->queryParameters = $queryParameters;
     }
 
-    public function get(string $key) : string
+    public function get(string $key) : ?string
     {
-        return $this->queryParameters[$key];
+        return $this->queryParameters[$key] ?? null;
     }
 }
