@@ -2,10 +2,11 @@
 
 namespace Essence\Http\Endpoints\Methods;
 
-use Essence\Http\Messages\Request\Request;
-use Essence\Http\Messages\Response\Response;
+
+use Essence\Http\Messages\Request\Wrapper\RequestWrapper;
+use Essence\Http\Messages\Response\Wrapper\ResponseWrapper;
 
 interface Patch extends RestVerb
 {
-    public function patch(Request $request) : Response;
+    public function patch(RequestWrapper $request) : ResponseWrapper;
 }

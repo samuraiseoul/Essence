@@ -1,11 +1,9 @@
 <?php
 
 
-namespace Http\Messages\Request\Wrapper;
-
+namespace Essence\Http\Messages\Request\Wrapper;
 
 use Essence\Http\Messages\Request\Request;
-use Psr\Http\Message\RequestInterface;
 
 interface RequestWrapper
 {
@@ -25,9 +23,5 @@ interface RequestWrapper
 
     public function postAsBool(string $key) : ?bool;
 
-    public function getBody() : string;
-
     public function getRequest() : Request;
-
-    public function getPSRRequest() : RequestInterface;
 }

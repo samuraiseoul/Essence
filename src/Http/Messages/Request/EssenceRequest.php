@@ -3,40 +3,46 @@
 namespace Essence\Http\Messages\Request;
 
 
-use Essence\Http\Messages\Request\Body\RequestBody;
-use Essence\Http\Messages\Request\Headers\RequestHeaders;
+use Essence\Http\Messages\Body\Body;
+use Essence\Http\Messages\Headers\Headers;
 use Essence\Http\Messages\Request\StartLine\RequestStartLine;
+use Essence\Http\Messages\StartLine;
 
 final class EssenceRequest implements Request
 {
     /** @var RequestStartLine */
     private $startLine;
 
-    /** @var RequestHeaders */
+    /** @var Headers */
     private $headers;
 
-    /** @var RequestBody */
+    /** @var Body */
     private $body;
 
-    public function __construct(RequestStartLine $startLine, RequestHeaders $headers, RequestBody $body)
+    public function __construct(RequestStartLine $startLine, Headers $headers, Body $body)
     {
         $this->startLine = $startLine;
         $this->headers = $headers;
         $this->body = $body;
     }
 
-    public function getStartLine(): RequestStartLine
+    public function getStartLine(): StartLine
     {
-        return $this->startLine;
+        return $this->getRequestStartLine();
     }
 
-    public function getHeaders(): RequestHeaders
+    public function getHeaders(): Headers
     {
         return $this->headers;
     }
 
-    public function getBody(): RequestBody
+    public function getBody(): Body
     {
         return $this->body;
+    }
+
+    public function getRequestStartLine(): RequestStartLine
+    {
+        return $this->startLine;
     }
 }

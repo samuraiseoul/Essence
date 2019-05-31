@@ -6,7 +6,9 @@ namespace Essence\Http\Endpoints;
 
 use Essence\Http\Messages\Request\Request;
 use Essence\Http\Messages\Request\Validator\RequestEndpointValidator;
+use Essence\Http\Messages\Request\Wrapper\EssenceRequestWrapper;
 use Essence\Http\Messages\Response\Response;
+use Essence\Http\Messages\Response\Wrapper\ResponseWrapper;
 
 final class EssenceEndpointHandler implements EndpointHandler
 {
@@ -23,10 +25,16 @@ final class EssenceEndpointHandler implements EndpointHandler
         return $this->processRequest($request, $endpoint);
     }
 
-    private function processRequest(Request  $request, Endpoint $endpoint) : Response
+    /**
+     * @param Request $request
+     * @param Endpoint $endpoint
+     * @return Response
+     */
+    private function processRequest(Request $request, Endpoint $endpoint) : Response
     {
-        $response = $endpoint->{strtolower($request->getStartLine()->getHTTPMethod())}($request);
-        return $response;
+        /** @var ResponseWrapper $responseWrapper */
+        $responseWrapper = $endpoint->{strtolower($request->getRequestStartLine()->getHTTPMethod())}(new EssenceRequestWrapper($request));
+        return $responseWrapper->getResponse();
     }
 
     private function validateRequest(Request  $request, Endpoint $endpoint) : void

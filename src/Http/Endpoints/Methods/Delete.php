@@ -2,10 +2,11 @@
 
 namespace Essence\Http\Endpoints\Methods;
 
-use Essence\Http\Messages\Request\Request;
-use Essence\Http\Messages\Response\Response;
+
+use Essence\Http\Messages\Request\Wrapper\RequestWrapper;
+use Essence\Http\Messages\Response\Wrapper\ResponseWrapper;
 
 interface Delete extends RestVerb
 {
-    public function delete(Request $request) : Response;
+    public function delete(RequestWrapper $request) : ResponseWrapper;
 }

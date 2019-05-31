@@ -4,15 +4,10 @@
 namespace Essence\Http\Messages\Request;
 
 
-use Essence\Http\Messages\Request\Body\RequestBody;
-use Essence\Http\Messages\Request\Headers\RequestHeaders;
+use Essence\Http\Messages\HttpMessage;
 use Essence\Http\Messages\Request\StartLine\RequestStartLine;
 
-interface Request
+interface Request extends HttpMessage
 {
-    public function getStartLine() : RequestStartLine;
-
-    public function getHeaders() : RequestHeaders;
-
-    public function getBody() : RequestBody;
+    public function getRequestStartLine() : RequestStartLine;
 }

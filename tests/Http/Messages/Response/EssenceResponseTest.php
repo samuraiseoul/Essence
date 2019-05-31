@@ -1,43 +1,43 @@
 <?php
 
 
-namespace Essence\Tests\Http\Messages\Request;
+namespace Http\Messages\Response;
 
 
 use Essence\Http\Messages\Body\Body;
 use Essence\Http\Messages\Headers\Headers;
-use Essence\Http\Messages\Request\EssenceRequest;
-use Essence\Http\Messages\Request\StartLine\RequestStartLine;
+use Essence\Http\Messages\Response\EssenceResponse;
+use Essence\Http\Messages\Response\StartLine\ResponseStartLine;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
-class EssenceRequestTest extends TestCase
+class EssenceResponseTest extends TestCase
 {
     public function testGetStartLine() : void {
         $startLine = $this->getMockStartLine();
-        $request = new EssenceRequest($startLine, $this->getMockHeaders(), $this->getMockBody());
+        $request = new EssenceResponse($startLine, $this->getMockHeaders(), $this->getMockBody());
         $this->assertEquals($startLine, $request->getStartLine());
     }
 
     public function testGetHeaders() : void {
         $requestHeaders = $this->getMockHeaders();
-        $request = new EssenceRequest($this->getMockStartLine(), $requestHeaders, $this->getMockBody());
+        $request = new EssenceResponse($this->getMockStartLine(), $requestHeaders, $this->getMockBody());
         $this->assertEquals($requestHeaders, $request->getHeaders());
     }
 
     public function testGetBody() : void {
         $requestBody = $this->getMockBody();
-        $request = new EssenceRequest($this->getMockStartLine(), $this->getMockHeaders(), $requestBody);
+        $request = new EssenceResponse($this->getMockStartLine(), $this->getMockHeaders(), $requestBody);
         $this->assertEquals($requestBody, $request->getBody());
     }
 
     /**
-     * @return MockObject | RequestStartLine
+     * @return MockObject | ResponseStartLine
      * @throws ReflectionException
      */
     private function getMockStartLine() {
-        return $this->createMock(RequestStartLine::class);
+        return $this->createMock(ResponseStartLine::class);
     }
 
     /**
@@ -55,4 +55,5 @@ class EssenceRequestTest extends TestCase
     private function getMockBody() {
         return $this->createMock(Body::class);
     }
+
 }

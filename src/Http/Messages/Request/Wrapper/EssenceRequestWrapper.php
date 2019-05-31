@@ -1,32 +1,25 @@
 <?php
 
 
-namespace Http\Messages\Request\Wrapper;
-
+namespace Essence\Http\Messages\Request\Wrapper;
 
 use BadMethodCallException;
-use Essence\Http\Messages\Request\Body\EssenceMultipleResourceBody;
-use Essence\Http\Messages\Request\Body\EssenceSingleResourceBody;
-use Essence\Http\Messages\Request\EssenceRequest;
+use Essence\Http\Messages\Body\EssenceMultipleResourceBody;
 use Essence\Http\Messages\Request\Request;
-use Psr\Http\Message\RequestInterface;
 
 final class EssenceRequestWrapper implements RequestWrapper
 {
-    /** @var EssenceRequest */
+    /** @var Request */
     private $request;
 
-    /** @var RequestPsrConverter */
-    private $converter;
-
-    public function __construct(EssenceRequest $request, RequestPsrConverter $converter)
+    public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->converter = $converter;
     }
 
-    private function getQueryParameter(string $key) {
-        return $this->request->getStartLine()->getRequestTarget()->getQueryStrings()->get($key);
+    private function getQueryParameter(string $key) : string {
+        $startLine = $this->request->getRequestStartLine();
+        return $startLine->getRequestTarget()->getQueryStrings()->get($key);
     }
 
     private function getPostVariable(string $key) {
@@ -78,23 +71,8 @@ final class EssenceRequestWrapper implements RequestWrapper
         return $this->getPostVariable($key);
     }
 
-    public function getBody(): string
-    {
-        /** @var EssenceSingleResourceBody $requestBody */
-        $requestBody = $this->request->getBody();
-        if($requestBody instanceof EssenceSingleResourceBody) {
-            return $requestBody->getContents();
-        }
-        throw new BadMethodCallException('Will not get body contents for multiple resource request bodies, those contents are in the post and file variables.');
-    }
-
     public function getRequest(): Request
     {
         return $this->request;
-    }
-
-    public function getPSRRequest(): RequestInterface
-    {
-        return $this->converter->convert($this->request);
     }
 }

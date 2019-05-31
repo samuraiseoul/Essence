@@ -3,41 +3,46 @@
 
 namespace Essence\Http\Messages\Response;
 
-
-use Essence\Http\Messages\Response\Body\ResponseBody;
-use Essence\Http\Messages\Response\Headers\ResponseHeaders;
+use Essence\Http\Messages\Body\Body;
+use Essence\Http\Messages\Headers\Headers;
 use Essence\Http\Messages\Response\StartLine\ResponseStartLine;
+use Essence\Http\Messages\StartLine;
 
 final class EssenceResponse implements Response
 {
     /** @var ResponseStartLine */
     private $startLine;
 
-    /** @var ResponseHeaders */
+    /** @var Headers */
     private $headers;
 
-    /** @var ResponseBody */
+    /** @var Body */
     private $body;
 
-    public function __construct(ResponseStartLine $startLine, ResponseHeaders $headers, ResponseBody $body)
+    public function __construct(ResponseStartLine $startLine, Headers $headers, Body $body)
     {
         $this->startLine = $startLine;
         $this->headers = $headers;
         $this->body = $body;
     }
 
-    public function getStartLine(): ResponseStartLine
+    public function getStartLine(): StartLine
     {
-        return $this->startLine;
+        return $this->getResponseStartLine();
     }
 
-    public function getHeaders(): ResponseHeaders
+    public function getHeaders(): Headers
     {
         return $this->headers;
     }
 
-    public function getBody(): ResponseBody
+    public function getBody(): Body
     {
         return $this->body;
+    }
+
+    public function getResponseStartLine(): ResponseStartLine
+    {
+        return $this->startLine;
     }
 }

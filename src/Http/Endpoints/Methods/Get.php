@@ -2,10 +2,10 @@
 
 namespace Essence\Http\Endpoints\Methods;
 
-use Essence\Http\Messages\Request\Request;
-use Essence\Http\Messages\Response\Response;
+use Essence\Http\Messages\Request\Wrapper\RequestWrapper;
+use Essence\Http\Messages\Response\Wrapper\ResponseWrapper;
 
 interface Get extends RestVerb
 {
-    public function get(Request $request) : Response;
+    public function get(RequestWrapper $request) : ResponseWrapper;
 }
