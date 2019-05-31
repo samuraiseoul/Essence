@@ -1,30 +1,48 @@
 <?php
 
-
 namespace Essence\Http\Messages\Request;
 
 
-use Psr\Http\Message\RequestInterface;
+use Essence\Http\Messages\Body\Body;
+use Essence\Http\Messages\Headers\Headers;
+use Essence\Http\Messages\Request\StartLine\RequestStartLine;
+use Essence\Http\Messages\StartLine;
 
-interface EssenceRequest
+final class EssenceRequest implements Request
 {
-    public function getScheme(): string;
+    /** @var RequestStartLine */
+    private $startLine;
 
-    public function getHost(): string;
+    /** @var Headers */
+    private $headers;
 
-    public function getPort(): int;
+    /** @var Body */
+    private $body;
 
-    public function getPath() : string;
+    public function __construct(RequestStartLine $startLine, Headers $headers, Body $body)
+    {
+        $this->startLine = $startLine;
+        $this->headers = $headers;
+        $this->body = $body;
+    }
 
-    public function getRestVerb(): string;
+    public function getStartLine(): StartLine
+    {
+        return $this->getRequestStartLine();
+    }
 
-    public function getHeaders() : array;
+    public function getHeaders(): Headers
+    {
+        return $this->headers;
+    }
 
-    public function getQueryParameters() : array;
+    public function getBody(): Body
+    {
+        return $this->body;
+    }
 
-    public function getFormData() : array;
-
-    public function getBody() : string;
-
-    public function toPsr7(): RequestInterface;
+    public function getRequestStartLine(): RequestStartLine
+    {
+        return $this->startLine;
+    }
 }

@@ -2,10 +2,10 @@
 
 namespace Essence\Http\Endpoints\Methods;
 
-use Essence\Http\Messages\Request\EssenceRequest;
-use Essence\Http\Messages\Response\EssenceResponse;
+use Essence\Http\Messages\Request\Wrapper\RequestWrapper;
+use Essence\Http\Messages\Response\Wrapper\ResponseWrapper;
 
 interface Put extends RestVerb
 {
-    public function put(EssenceRequest $request) : EssenceResponse;
+    public function put(RequestWrapper $request) : ResponseWrapper;
 }

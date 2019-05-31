@@ -3,20 +3,46 @@
 
 namespace Essence\Http\Messages\Response;
 
+use Essence\Http\Messages\Body\Body;
+use Essence\Http\Messages\Headers\Headers;
+use Essence\Http\Messages\Response\StartLine\ResponseStartLine;
+use Essence\Http\Messages\StartLine;
 
-use Psr\Http\Message\ResponseInterface;
-
-interface EssenceResponse
+final class EssenceResponse implements Response
 {
-    public function setProtocol(string $protocol): EssenceResponse;
+    /** @var ResponseStartLine */
+    private $startLine;
 
-    public function setStatusCode(int $statusCode): EssenceResponse;
+    /** @var Headers */
+    private $headers;
 
-    public function setStatusText(string $statusText): EssenceResponse;
+    /** @var Body */
+    private $body;
 
-    public function setHeaders(array $headers) : EssenceResponse;
+    public function __construct(ResponseStartLine $startLine, Headers $headers, Body $body)
+    {
+        $this->startLine = $startLine;
+        $this->headers = $headers;
+        $this->body = $body;
+    }
 
-    public function setBody(string $body) : EssenceResponse;
+    public function getStartLine(): StartLine
+    {
+        return $this->getResponseStartLine();
+    }
 
-    public function toPsr7(): ResponseInterface;
+    public function getHeaders(): Headers
+    {
+        return $this->headers;
+    }
+
+    public function getBody(): Body
+    {
+        return $this->body;
+    }
+
+    public function getResponseStartLine(): ResponseStartLine
+    {
+        return $this->startLine;
+    }
 }

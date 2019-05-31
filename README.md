@@ -39,36 +39,37 @@ this will run the tests and ensure that everything is in working order!
 A basic working example of a file that uses Essence for its lifecycle would be:
 
 ```php
-require '../bootstrap.php';
+<?php
 
-use Essence\Http\Endpoint;
-use Essence\Http\Methods\Get;
-use Essence\Request\MethodRequests\GetRequest;
-use Essence\Http\Methods\Post;
-use Essence\Request\MethodRequests\PostRequest;
-use Essence\Response\BaseResponse;
-use Essence\Response\JsonResponse;
-use Essence\Response\ResponseFormat;
+require './vendor/autoload.php';
 
-new class() extends Endpoint implements Get, Post {
-    public function get(GetRequest $request): BaseResponse
+use Essence\Essence;
+use Essence\Http\Endpoints\Methods\Get;
+use Essence\Http\Messages\Headers\EssenceHeader;
+use Essence\Http\Messages\Request\Wrapper\RequestWrapper;
+use Essence\Http\Messages\Response\Wrapper\EssenceResponseWrapper;
+use Essence\Http\Messages\Response\Wrapper\ResponseWrapper;
+
+Essence::define(new class(42) implements Get {
+    /** @var int */
+    private $dependencyInjectedInteger;
+
+    public function __construct(int $dependencyInjectedInteger)
     {
-        // Fetch DB row
-        return new JsonResponse(new class() extends ResponseFormat {
-            public $exampleField = 'Real value';
-            public $additionalField = 42;
-        });
+        $this->dependencyInjectedInteger = $dependencyInjectedInteger;
     }
-    
-    public function post(PostRequest $request): BaseResponse
+
+    public function get(RequestWrapper $requestWrapper): ResponseWrapper
     {
-        // Interact with Post body here
-        return new JsonResponse(new class() extends ResponseFormat {
-            public $username = 'testuser';
-            public $userId = 234;
-        });
+        $userId = $requestWrapper->queryParameterAsInt('userId');
+        $header = new EssenceHeader('X-Essence', 'Vanilla PHP Framework');
+
+        $responseWrapper = new EssenceResponseWrapper();
+        $responseWrapper->setRawBody("Random ass stuff plus the dependency injected integer, {$this->dependencyInjectedInteger}! Now featuring the userId param, $userId!");
+        $responseWrapper->addHeader($header);
+        return $responseWrapper;
     }
-};
+});
 ```
 
 ## Roadmap / Future Development 

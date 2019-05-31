@@ -2,49 +2,72 @@
 
 namespace Essence\Tests\Http;
 
-use Essence\Http\Endpoints\EndpointHandler;
+use Essence\Http\Endpoints\EssenceEndpointHandler;
 use Essence\Http\Endpoints\Methods\Get;
-use Essence\Http\Messages\Request\EssenceRequest;
-use Essence\Http\Messages\Request\RequestEndpointValidationInterface;
-use Essence\Http\Messages\Response\EssenceResponse;
+use Essence\Http\Messages\Request\Request;
+use Essence\Http\Messages\Request\StartLine\RequestStartLine;
+use Essence\Http\Messages\Request\Validator\RequestEndpointValidator;
+use Essence\Http\Messages\Response\Response;
+use Essence\Http\Messages\Response\Wrapper\ResponseWrapper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
-class EndpointTest extends TestCase
+class EndpointHandlerTest extends TestCase
 {
     public function testRequestValidated() : void {
         $mockEssenceRequest = $this->createRequestMock();
         $mockEssenceResponse = $this->createResponseMock();
-        $mockGetEndpoint = $this->createEndpointMock($mockEssenceResponse);
+        $mockEssenceResponseWrapper = $this->createResponseWrapperMock($mockEssenceResponse);
+        $mockGetEndpoint = $this->createEndpointMock($mockEssenceResponseWrapper);
         $mockRequestValidator = $this->createValidatorMock();
 
-        $endpointHandler = new EndpointHandler($mockRequestValidator);
+        $endpointHandler = new EssenceEndpointHandler($mockRequestValidator);
         $response = $endpointHandler->handleEndpoint($mockEssenceRequest, $mockGetEndpoint);
         $this->assertEquals($mockEssenceResponse,$response);
     }
 
     /**
-     * @return EssenceRequest|MockObject
+     * @return Request|MockObject
      * @throws ReflectionException
      */
     public function createRequestMock()
     {
-        /** @var EssenceRequest | MockObject $mockEssenceRequest */
-        $mockEssenceRequest = $this->createMock(EssenceRequest::class);
-        $mockEssenceRequest->method('getRestVerb')->willReturn('GET');
+        /** @var Request | MockObject $mockEssenceRequest */
+        $mockEssenceRequest = $this->createMock(Request::class);
+        $mockEssenceRequest->method('getRequestStartLine')->willReturn($this->createStartLineMock());
         return $mockEssenceRequest;
     }
 
+    public function createStartLineMock()
+    {
+        $mockStartLine = $this->createMock(RequestStartLine::class);
+        $mockStartLine->method('getHTTPMethod')->willReturn('GET');
+        return $mockStartLine;
+    }
+
     /**
-     * @return EssenceResponse|MockObject
+     * @return Response|MockObject
      * @throws ReflectionException
      */
     public function createResponseMock()
     {
-        /** @var EssenceResponse | MockObject $mockEssenceResponse */
-        $mockEssenceResponse = $this->createMock(EssenceResponse::class);
+        /** @var Response | MockObject $mockEssenceResponse */
+        $mockEssenceResponse = $this->createMock(Response::class);
         return $mockEssenceResponse;
+    }
+
+    /**
+     * @param Response $responseMock
+     * @return ResponseWrapper|MockObject
+     * @throws ReflectionException
+     */
+    public function createResponseWrapperMock($responseMock)
+    {
+        /** @var ResponseWrapper | MockObject $mockEssenceResponse */
+        $mockEssenceResponseWrapper = $this->createMock(ResponseWrapper::class);
+        $mockEssenceResponseWrapper->method('getResponse')->willReturn($responseMock);
+        return $mockEssenceResponseWrapper;
     }
 
     /**
@@ -61,13 +84,13 @@ class EndpointTest extends TestCase
     }
 
     /**
-     * @return RequestEndpointValidationInterface|MockObject
+     * @return RequestEndpointValidator|MockObject
      * @throws ReflectionException
      */
     public function createValidatorMock()
     {
-        /** @var RequestEndpointValidationInterface | MockObject $mockRequestValidator */
-        $mockRequestValidator = $this->createMock(RequestEndpointValidationInterface::class);
+        /** @var RequestEndpointValidator | MockObject $mockRequestValidator */
+        $mockRequestValidator = $this->createMock(RequestEndpointValidator::class);
         $mockRequestValidator->method('endpointCanHandleRequest')->willReturn(true);
         return $mockRequestValidator;
     }
