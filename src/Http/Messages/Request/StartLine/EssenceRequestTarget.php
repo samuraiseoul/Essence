@@ -12,10 +12,14 @@ final class EssenceRequestTarget implements RequestTarget
     /** @var QueryParameters */
     private $queryStrings;
 
-    public function __construct(string $path, QueryParameters $queryStrings)
+    /** @var PathParameters */
+    private $pathParameters;
+
+    public function __construct(string $path, QueryParameters $queryStrings, PathParameters $pathParameters)
     {
         $this->path = $path;
         $this->queryStrings = $queryStrings;
+        $this->pathParameters = $pathParameters;
     }
 
     public function getPath(): string
@@ -26,5 +30,10 @@ final class EssenceRequestTarget implements RequestTarget
     public function getQueryStrings(): QueryParameters
     {
         return $this->queryStrings;
+    }
+
+    public function getPathParameters(): PathParameters
+    {
+        return $this->pathParameters;
     }
 }
