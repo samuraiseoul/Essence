@@ -32,8 +32,10 @@ final class EssenceEndpointHandler implements EndpointHandler
      */
     private function processRequest(Request $request, Endpoint $endpoint) : Response
     {
+        $restMethod = strtolower($request->getRequestStartLine()->getHTTPMethod());
+        $requestWrapper = new EssenceRequestWrapper($request);
         /** @var ResponseWrapper $responseWrapper */
-        $responseWrapper = $endpoint->{strtolower($request->getRequestStartLine()->getHTTPMethod())}(new EssenceRequestWrapper($request));
+        $responseWrapper = $endpoint->{$restMethod}($requestWrapper);
         return $responseWrapper->getResponse();
     }
 

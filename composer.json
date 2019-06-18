@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php" : "^7.4",
+        "php" : "^7.3",
         "ext-json": "*",
         "psr/http-message": "^1.0"
     },
@@ -29,6 +29,10 @@
         }
     },
     "scripts": {
-        "test" : "phpunit"
+        "test" : [
+            "@composer install",
+            "@composer dump-autoload -o",
+            "phpunit"
+        ]
     }
 }

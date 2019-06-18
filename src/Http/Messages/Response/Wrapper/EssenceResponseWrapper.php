@@ -13,6 +13,7 @@ use Essence\Http\Messages\Response\EssenceResponse;
 use Essence\Http\Messages\Response\Response;
 use Essence\Http\Messages\Response\StartLine\EssenceResponseStartLine;
 use Essence\Http\Messages\Response\StartLine\ResponseStartLine;
+use JsonSerializable;
 
 final class EssenceResponseWrapper implements ResponseWrapper
 {
@@ -32,7 +33,6 @@ final class EssenceResponseWrapper implements ResponseWrapper
         $this->body = $body ?? new EssenceSingleResourceBody('');
     }
 
-
     public function addHeader(Header $header): ResponseWrapper
     {
         $headers = $this->headers->all();
@@ -47,7 +47,7 @@ final class EssenceResponseWrapper implements ResponseWrapper
         return $this;
     }
 
-    public function setJsonBody(\JsonSerializable $json): ResponseWrapper
+    public function setJsonBody(JsonSerializable $json): ResponseWrapper
     {
         $this->body = new EssenceSingleResourceBody(json_encode($json));
         return $this;
