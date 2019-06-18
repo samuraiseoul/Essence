@@ -8,6 +8,7 @@ use Essence\Http\Endpoints\EndpointHandler;
 use Essence\Http\Endpoints\EssenceEndpointHandler;
 use Essence\Http\Messages\Request\Factories\Body\EssenceRequestBodyFactory;
 use Essence\Http\Messages\Request\Factories\Headers\EssenceRequestHeadersFactory;
+use Essence\Http\Messages\Request\Factories\StartLine\EssencePathParameterFactory;
 use Essence\Http\Messages\Request\Factories\StartLine\EssenceQueryParameterFactory;
 use Essence\Http\Messages\Request\Factories\StartLine\EssenceRequestStartLineFactory;
 use Essence\Http\Messages\Request\Factories\StartLine\EssenceRequestTargetFactory;
@@ -35,9 +36,10 @@ final class Essence
     private static function prepareRequest() : Request
     {
         $queryParametersFactory = new EssenceQueryParameterFactory();
+        $pathParametersFactory = new EssencePathParameterFactory();
         $headersFactory = new EssenceRequestHeadersFactory();
         $bodyFactory = new EssenceRequestBodyFactory();
-        $requestTargetFactory = new EssenceRequestTargetFactory($queryParametersFactory);
+        $requestTargetFactory = new EssenceRequestTargetFactory($queryParametersFactory, $pathParametersFactory);
         $startLineFactory = new EssenceRequestStartLineFactory($requestTargetFactory);
         $requestFactory = new EssenceRequestFactory($startLineFactory, $headersFactory, $bodyFactory);
         return $requestFactory->getRequest();

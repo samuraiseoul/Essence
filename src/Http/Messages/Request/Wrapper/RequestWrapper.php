@@ -23,5 +23,7 @@ interface RequestWrapper
 
     public function postAsBool(string $key) : ?bool;
 
+    public function getPathParameter(string $key) : string;
+
     public function getRequest() : Request;
 }

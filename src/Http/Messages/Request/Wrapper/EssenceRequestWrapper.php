@@ -31,6 +31,12 @@ final class EssenceRequestWrapper implements RequestWrapper
         throw new BadMethodCallException('Will not get post vars for single resource request bodies, those contents should not be present.');
     }
 
+    public function getPathParameter(string $key) : string {
+        /** @var EssenceMultipleResourceBody $requestBody */
+        $requestStartLine = $this->request->getRequestStartLine();
+        return $requestStartLine->getRequestTarget()->getPathParameters()->get($key);
+    }
+
     public function queryParameterAsString(string $key): ?string
     {
         return $this->getQueryParameter($key);
