@@ -1,0 +1,18 @@
+{
+  "name": "your-company/foo-project",
+  "require": {
+    "php": "^7.2",
+    "samuraiseoul/essence": "@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "EssenceTest\\": "public/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "~/projects/Essence"
+    }
+  ]
+}

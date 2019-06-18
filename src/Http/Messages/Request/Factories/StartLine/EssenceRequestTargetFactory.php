@@ -5,6 +5,7 @@ namespace Essence\Http\Messages\Request\Factories\StartLine;
 
 use BadMethodCallException;
 use Essence\Http\Messages\Request\StartLine\EssenceRequestTarget;
+use Essence\Http\Messages\Request\StartLine\PathParameters;
 use Essence\Http\Messages\Request\StartLine\QueryParameters;
 use Essence\Http\Messages\Request\StartLine\RequestTarget;
 
@@ -16,9 +17,12 @@ final class EssenceRequestTargetFactory implements RequestTargetFactory
     /** @var QueryParametersFactory */
     private $queryParametersFactory;
 
-    public function __construct(QueryParametersFactory $queryParametersFactory)
+    private $pathParametersFactory;
+
+    public function __construct(QueryParametersFactory $queryParametersFactory, PathParameterFactory $pathParameterFactory)
     {
         $this->queryParametersFactory = $queryParametersFactory;
+        $this->pathParametersFactory = $pathParameterFactory;
     }
 
     public function getRequestTarget(): RequestTarget
@@ -34,11 +38,15 @@ final class EssenceRequestTargetFactory implements RequestTargetFactory
         return $this->queryParametersFactory->getQueryParameters();
     }
 
+    private function getPathParameters() : PathParameters {
+        return $this->pathParametersFactory->getPathParameters();
+    }
+
     private function createEssenceRequestTarget(): EssenceRequestTarget
     {
         if($this->requestTarget) {
             throw new BadMethodCallException('Request target has already been instantiated!');
         }
-        return new EssenceRequestTarget($this->getPath(), $this->getQueryParameters());
+        return new EssenceRequestTarget($this->getPath(), $this->getQueryParameters(), $this->getPathParameters());
     }
 }
