@@ -17,12 +17,12 @@ final class EssenceRequestWrapper implements RequestWrapper
         $this->request = $request;
     }
 
-    private function getQueryParameter(string $key) : string {
+    public function getQueryParameter(string $key) : string {
         $startLine = $this->request->getRequestStartLine();
         return $startLine->getRequestTarget()->getQueryStrings()->get($key);
     }
 
-    private function getPostVariable(string $key) {
+    public function getPostVariable(string $key) : string {
         /** @var EssenceMultipleResourceBody $requestBody */
         $requestBody = $this->request->getBody();
         if($requestBody instanceof EssenceMultipleResourceBody) {
@@ -32,49 +32,8 @@ final class EssenceRequestWrapper implements RequestWrapper
     }
 
     public function getPathParameter(string $key) : string {
-        /** @var EssenceMultipleResourceBody $requestBody */
         $requestStartLine = $this->request->getRequestStartLine();
         return $requestStartLine->getRequestTarget()->getPathParameters()->get($key);
-    }
-
-    public function queryParameterAsString(string $key): ?string
-    {
-        return $this->getQueryParameter($key);
-    }
-
-    public function queryParameterAsInt(string $key): ?int
-    {
-        return $this->getQueryParameter($key);
-    }
-
-    public function queryParameterAsFloat(string $key): ?float
-    {
-        return $this->getQueryParameter($key);
-    }
-
-    public function queryParameterAsBool(string $key): ?bool
-    {
-        return $this->getQueryParameter($key);
-    }
-
-    public function postAsString(string $key): ?string
-    {
-        return $this->getPostVariable($key);
-    }
-
-    public function postAsInt(string $key): ?int
-    {
-        return $this->getPostVariable($key);
-    }
-
-    public function postAsFloat(string $key): ?float
-    {
-        return $this->getPostVariable($key);
-    }
-
-    public function postAsBool(string $key): ?bool
-    {
-        return $this->getPostVariable($key);
     }
 
     public function getRequest(): Request

@@ -3,16 +3,10 @@
 
 namespace Essence\Http\Router;
 
-
-use Essence\Http\Messages\Request\StartLine\EssencePathParameters;
-use Essence\Http\Messages\Request\StartLine\PathParameters;
-use InvalidArgumentException;
-use OutOfBoundsException;
-
 abstract class AbstractEssenceRouter implements Router
 {
     public function route() : void {
-        require_once($_SERVER['DOCUMENT_ROOT'] . $this->getEndpointPath() . '/index.php');
+        require_once $_SERVER['DOCUMENT_ROOT'] . $this->getEndpointPath() . '/index.php';
     }
 
     private function getEndpointPath() : string
@@ -21,8 +15,7 @@ abstract class AbstractEssenceRouter implements Router
         $nonNumericPathParts = array_filter($pathParts, function(string $pathPart) {
             return !is_numeric($pathPart);
         });
-        $pathWithoutParameters = implode('/', $nonNumericPathParts);
-        return $pathWithoutParameters;
+        return implode('/', $nonNumericPathParts);
     }
 
     private function getPathParts(string $fullPath) : array {
