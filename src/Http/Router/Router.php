@@ -9,5 +9,5 @@ use Essence\Http\Messages\Request\StartLine\PathParameters;
 
 interface Router
 {
-    public function route() : void;
+    public function route() : Endpoint;
 }

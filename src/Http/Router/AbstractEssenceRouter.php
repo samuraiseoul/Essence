@@ -3,10 +3,12 @@
 
 namespace Essence\Http\Router;
 
+use Essence\Http\Endpoints\Endpoint;
+
 abstract class AbstractEssenceRouter implements Router
 {
-    public function route() : void {
-        require_once $_SERVER['DOCUMENT_ROOT'] . $this->getEndpointPath() . '/index.php';
+    public function route() : Endpoint {
+        return require_once $_SERVER['DOCUMENT_ROOT'] . '/public' . $this->getEndpointPath() . '/index.php';
     }
 
     private function getEndpointPath() : string
