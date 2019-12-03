@@ -7,7 +7,7 @@ namespace Essence\Http\Messages\Request\StartLine;
 final class EssenceQueryParameters implements QueryParameters
 {
     /** @var string[] */
-    private $queryParameters;
+    private array $queryParameters;
 
     public function __construct(array $queryParameters)
     {

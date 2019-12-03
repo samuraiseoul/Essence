@@ -9,14 +9,11 @@ use InvalidArgumentException;
 
 final class EssenceRequestStartLine implements RequestStartLine
 {
-    /** @var string */
-    private $httpMethod;
+    private string $httpMethod;
 
-    /** @var RequestTarget */
-    private $requestTarget;
+    private RequestTarget $requestTarget;
 
-    /** @var string */
-    private $httpVersion;
+    private string $httpVersion;
 
     public function __construct(string $httpMethod, RequestTarget $requestTarget, string $httpVersion)
     {
@@ -43,7 +40,7 @@ final class EssenceRequestStartLine implements RequestStartLine
 
     private function validateHttpMethod(string $httpMethod): void
     {
-        if (!in_array($httpMethod, RestConstants::VERBS)) {
+        if (!in_array($httpMethod, RestConstants::VERBS, true)) {
             throw new InvalidArgumentException("Supplied HTTP Verb, $httpMethod, not a valid HTTP verb!");
         }
     }

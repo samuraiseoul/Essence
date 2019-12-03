@@ -9,8 +9,7 @@ use Essence\Http\Messages\Request\Request;
 
 final class EssenceRequestWrapper implements RequestWrapper
 {
-    /** @var Request */
-    private $request;
+    private Request $request;
 
     public function __construct(Request $request)
     {

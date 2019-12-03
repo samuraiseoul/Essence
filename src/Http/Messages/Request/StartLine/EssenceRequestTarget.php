@@ -6,11 +6,9 @@ namespace Essence\Http\Messages\Request\StartLine;
 
 final class EssenceRequestTarget implements RequestTarget
 {
-    /** @var string */
-    private $path;
+    private string $path;
 
-    /** @var QueryParameters */
-    private $queryStrings;
+    private QueryParameters $queryStrings;
 
     public function __construct(string $path, QueryParameters $queryStrings)
     {

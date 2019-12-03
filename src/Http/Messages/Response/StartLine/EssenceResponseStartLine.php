@@ -6,14 +6,11 @@ namespace Essence\Http\Messages\Response\StartLine;
 
 final class EssenceResponseStartLine implements ResponseStartLine
 {
-    /** @var string */
-    private $protocol;
+    private string $protocol;
 
-    /** @var int */
-    private $statusCode;
+    private int $statusCode;
 
-    /** @var string */
-    private $statusText;
+    private string $statusText;
 
     public function __construct(string $protocol, int $statusCode, string $statusText)
     {

@@ -10,14 +10,11 @@ use Essence\Http\Messages\StartLine;
 
 final class EssenceResponse implements Response
 {
-    /** @var ResponseStartLine */
-    private $startLine;
+    private ResponseStartLine $startLine;
 
-    /** @var Headers */
-    private $headers;
+    private Headers $headers;
 
-    /** @var Body */
-    private $body;
+    private Body $body;
 
     public function __construct(ResponseStartLine $startLine, Headers $headers, Body $body)
     {

@@ -10,11 +10,9 @@ use Essence\Http\Messages\Request\StartLine\RequestTarget;
 
 final class EssenceRequestTargetFactory implements RequestTargetFactory
 {
-    /** @var RequestTarget */
-    private $requestTarget;
+    private RequestTarget $requestTarget;
 
-    /** @var QueryParametersFactory */
-    private $queryParametersFactory;
+    private QueryParametersFactory $queryParametersFactory;
 
     public function __construct(QueryParametersFactory $queryParametersFactory)
     {

@@ -6,11 +6,9 @@ namespace Essence\Http\Messages\Headers;
 
 final class EssenceHeader implements Header
 {
-    /** @var string */
-    private $name;
+    private string $name;
 
-    /** @var string */
-    private $value;
+    private string $value;
 
     public function __construct(string $name, string $value)
     {

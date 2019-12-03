@@ -6,8 +6,7 @@ namespace Essence\Http\Messages\Body;
 
 final class EssenceSingleResourceBody implements SingleResourceBody
 {
-    /** @var string */
-    private $contents;
+    private string $contents;
 
     public function __construct(string $contents)
     {

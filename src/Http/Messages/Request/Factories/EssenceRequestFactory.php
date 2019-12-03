@@ -16,17 +16,13 @@ use Essence\Http\Messages\Request\StartLine\RequestStartLine;
 
 final class EssenceRequestFactory implements RequestFactory
 {
-    /** @var EssenceRequest */
-    private $request;
+    private EssenceRequest $request;
 
-    /** @var RequestStartLineFactory */
-    private $startLineFactory;
+    private RequestStartLineFactory $startLineFactory;
 
-    /** @var RequestHeadersFactory */
-    private $headersFactory;
+    private RequestHeadersFactory $headersFactory;
 
-    /** @var RequestBodyFactory */
-    private $bodyFactory;
+    private RequestBodyFactory $bodyFactory;
 
     public function __construct(RequestStartLineFactory $startLineFactory, RequestHeadersFactory $headersFactory, RequestBodyFactory $bodyFactory)
     {

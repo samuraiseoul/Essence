@@ -10,14 +10,11 @@ use Essence\Http\Messages\StartLine;
 
 final class EssenceRequest implements Request
 {
-    /** @var RequestStartLine */
-    private $startLine;
+    private RequestStartLine $startLine;
 
-    /** @var Headers */
-    private $headers;
+    private Headers $headers;
 
-    /** @var Body */
-    private $body;
+    private Body $body;
 
     public function __construct(RequestStartLine $startLine, Headers $headers, Body $body)
     {

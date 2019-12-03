@@ -10,11 +10,9 @@ use Essence\Http\Messages\Request\StartLine\RequestTarget;
 
 final class EssenceRequestStartLineFactory implements RequestStartLineFactory
 {
-    /** @var EssenceRequestStartLine */
-    private $startLine;
+    private EssenceRequestStartLine $startLine;
 
-    /** @var RequestTargetFactory */
-    private $requestTargetFactory;
+    private RequestTargetFactory $requestTargetFactory;
 
     public function __construct(RequestTargetFactory $requestTargetFactory)
     {
@@ -38,9 +36,6 @@ final class EssenceRequestStartLineFactory implements RequestStartLineFactory
         return $_SERVER['SERVER_PROTOCOL'];
     }
 
-    /**
-     * @return EssenceRequestStartLine
-     */
     private function createStartLine(): EssenceRequestStartLine
     {
         if($this->startLine) {

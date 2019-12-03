@@ -16,14 +16,11 @@ use Essence\Http\Messages\Response\StartLine\ResponseStartLine;
 
 final class EssenceResponseWrapper implements ResponseWrapper
 {
-    /** @var ResponseStartLine */
-    private $startLine;
+    private ResponseStartLine $startLine;
 
-    /** @var Headers */
-    private $headers;
+    private Headers $headers;
 
-    /** @var Body */
-    private $body;
+    private Body $body;
 
     public function __construct(ResponseStartLine $startLine = null, Headers $headers = null, Body $body = null)
     {

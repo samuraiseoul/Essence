@@ -12,8 +12,7 @@ use Essence\Http\Messages\Response\Wrapper\ResponseWrapper;
 
 final class EssenceEndpointHandler implements EndpointHandler
 {
-    /** @var RequestEndpointValidator */
-    private $requestEndpointValidator;
+    private RequestEndpointValidator $requestEndpointValidator;
 
     public function __construct(RequestEndpointValidator $requestEndpointValidator)
     {
@@ -25,11 +24,6 @@ final class EssenceEndpointHandler implements EndpointHandler
         return $this->processRequest($request, $endpoint);
     }
 
-    /**
-     * @param Request $request
-     * @param Endpoint $endpoint
-     * @return Response
-     */
     private function processRequest(Request $request, Endpoint $endpoint) : Response
     {
         /** @var ResponseWrapper $responseWrapper */

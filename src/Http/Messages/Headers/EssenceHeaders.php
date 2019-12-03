@@ -7,7 +7,7 @@ namespace Essence\Http\Messages\Headers;
 final class EssenceHeaders implements Headers
 {
     /** @var Header[] */
-    private $headers;
+    private array $headers;
 
     /** @param Header[] $headers */
     public function __construct(array $headers)
@@ -19,10 +19,6 @@ final class EssenceHeaders implements Headers
         $this->headers = $mappedHeaders;
     }
 
-    /**
-     * @param string $headerName
-     * @return Header
-     */
     public function get(string $headerName): Header
     {
         return $this->headers[$headerName];
