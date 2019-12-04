@@ -1,22 +1,21 @@
 <?php
 
 
-namespace Essence\Http\Messages\Request\StartLine;
+namespace Essence\Http\Messages\Body;
 
 
-final class EssenceQueryParameters implements QueryParameters
+final class EssencePostParameters implements PostParameters
 {
-    /** @var string[] */
-    private array $queryParameters;
+    /** @var string[]  */
+    private array $postParameters;
 
-    public function __construct(array $queryParameters)
+    public function __construct(array $postParameters)
     {
-        $this->queryParameters = $queryParameters;
+        $this->postParameters = $postParameters;
     }
 
-    private function get(string $key) : ?string
-    {
-        return $this->queryParameters[$key] ?? null;
+    public function get(string $key) : ?string {
+        return $this->postParameters[$key];
     }
 
     public function getAsString(string $key): ?string

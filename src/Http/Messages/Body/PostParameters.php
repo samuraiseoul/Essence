@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Essence\Http\Messages\Request\StartLine;
+namespace Essence\Http\Messages\Body;
 
 
-interface QueryParameters
+interface PostParameters
 {
     public function getAsString(string $key): ?string;
 

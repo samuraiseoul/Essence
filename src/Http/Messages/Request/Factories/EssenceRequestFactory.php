@@ -16,7 +16,7 @@ use Essence\Http\Messages\Request\StartLine\RequestStartLine;
 
 final class EssenceRequestFactory implements RequestFactory
 {
-    private EssenceRequest $request;
+    private ?EssenceRequest $request = null;
 
     private RequestStartLineFactory $startLineFactory;
 

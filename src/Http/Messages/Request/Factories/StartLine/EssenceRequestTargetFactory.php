@@ -10,7 +10,7 @@ use Essence\Http\Messages\Request\StartLine\RequestTarget;
 
 final class EssenceRequestTargetFactory implements RequestTargetFactory
 {
-    private RequestTarget $requestTarget;
+    private ?RequestTarget $requestTarget = null;
 
     private QueryParametersFactory $queryParametersFactory;
 

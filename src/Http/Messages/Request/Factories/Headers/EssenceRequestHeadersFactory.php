@@ -11,7 +11,7 @@ use Essence\Http\Messages\Headers\Headers;
 
 final class EssenceRequestHeadersFactory implements RequestHeadersFactory
 {
-    private Headers $headers;
+    private ?Headers $headers = null;
 
     public function getHeaders(): Headers
     {

@@ -4,7 +4,7 @@
 namespace Essence\Http\Messages\Response\Emitters;
 
 
-use Essence\Http\Messages\Body\EssenceSingleResourceBody;
+use Essence\Http\Messages\Body\EssenceSingleResourceRequestBody;
 use Essence\Http\Messages\Headers\Header;
 use Essence\Http\Messages\Response\Response;
 
@@ -34,7 +34,7 @@ final class EssenceEmitter implements Emitter
 
     private function emitBody(Response $response): void
     {
-        /** @var EssenceSingleResourceBody $body */
+        /** @var EssenceSingleResourceRequestBody $body */
         $body = $response->getBody();
         echo $body->getContents();
     }

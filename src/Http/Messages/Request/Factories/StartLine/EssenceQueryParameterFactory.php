@@ -9,7 +9,7 @@ use Essence\Http\Messages\Request\StartLine\QueryParameters;
 
 final class EssenceQueryParameterFactory implements QueryParametersFactory
 {
-    private QueryParameters $queryParameters;
+    private ?QueryParameters $queryParameters = null;
 
     public function getQueryParameters(): QueryParameters
     {

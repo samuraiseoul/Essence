@@ -4,8 +4,6 @@ namespace Essence;
 
 use BadMethodCallException;
 use Essence\Http\Endpoints\Endpoint;
-use Essence\Http\Endpoints\EndpointHandler;
-use Essence\Http\Endpoints\EssenceEndpointHandler;
 use Essence\Http\Messages\Request\Factories\Body\EssenceRequestBodyFactory;
 use Essence\Http\Messages\Request\Factories\Headers\EssenceRequestHeadersFactory;
 use Essence\Http\Messages\Request\Factories\StartLine\EssenceQueryParameterFactory;
@@ -13,9 +11,12 @@ use Essence\Http\Messages\Request\Factories\StartLine\EssenceRequestStartLineFac
 use Essence\Http\Messages\Request\Factories\StartLine\EssenceRequestTargetFactory;
 use Essence\Http\Messages\Request\Factory\EssenceRequestFactory;
 use Essence\Http\Messages\Request\Request;
-use Essence\Http\Messages\Request\Validator\EssenceRequestEndpointValidator;
+use Essence\Http\Messages\Request\Wrapper\EssenceRequestWrapper;
 use Essence\Http\Messages\Response\Emitters\Emitter;
 use Essence\Http\Messages\Response\Emitters\EssenceEmitter;
+use Essence\Http\Messages\Response\EssenceResponseFactory;
+use Essence\Http\Messages\Response\Response;
+use Essence\Http\Messages\Response\Wrapper\ResponseWrapper;
 
 final class Essence
 {
@@ -27,9 +28,15 @@ final class Essence
     public static function define(Endpoint $endpoint): void
     {
         $request = self::prepareRequest();
-        $handler = self::prepareEndpointHandler();
         $emitter = self::prepareEmitter();
-        $emitter->emitResponse($handler->handleEndpoint($request, $endpoint));
+        $responseWrapper = self::handleEndpoint($request, $endpoint);
+        $response = self::prepareResponse($responseWrapper);
+        $emitter->emitResponse($response);
+    }
+
+    private static function prepareResponse(ResponseWrapper $responseWrapper) : Response {
+        $responseFactory = new EssenceResponseFactory();
+        return $responseFactory->fromResponseWrapper($responseWrapper);
     }
 
     private static function prepareRequest() : Request
@@ -43,13 +50,12 @@ final class Essence
         return $requestFactory->getRequest();
     }
 
-    private static function prepareEndpointHandler() : EndpointHandler
-    {
-        $requestEndpointValidator = new EssenceRequestEndpointValidator();
-        return new EssenceEndpointHandler($requestEndpointValidator);
-    }
-
     private static function prepareEmitter() : Emitter {
         return new EssenceEmitter();
+    }
+
+    private static function handleEndpoint(Request $request, Endpoint $endpoint) : ResponseWrapper {
+        $methodName = strtolower($request->getRequestStartLine()->getHTTPMethod());
+        return $endpoint->{$methodName}(new EssenceRequestWrapper($request));
     }
 }

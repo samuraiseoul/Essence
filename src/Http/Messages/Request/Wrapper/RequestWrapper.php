@@ -3,25 +3,15 @@
 
 namespace Essence\Http\Messages\Request\Wrapper;
 
+use Essence\Http\Messages\Body\PostParameters;
 use Essence\Http\Messages\Request\Request;
+use Essence\Http\Messages\Request\StartLine\QueryParameters;
 
 interface RequestWrapper
 {
-    public function queryParameterAsString(string $key) : ?string;
+    public function getQueryParameters() : QueryParameters;
 
-    public function queryParameterAsInt(string $key) : ?int;
-
-    public function queryParameterAsFloat(string $key) : ?float;
-
-    public function queryParameterAsBool(string $key) : ?bool;
-
-    public function postAsString(string $key) : ?string;
-
-    public function postAsInt(string $key) : ?int;
-
-    public function postAsFloat(string $key) : ?float;
-
-    public function postAsBool(string $key) : ?bool;
+    public function getPostParameters() : PostParameters;
 
     public function getRequest() : Request;
 }
