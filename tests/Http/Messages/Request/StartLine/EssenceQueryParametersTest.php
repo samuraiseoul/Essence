@@ -15,6 +15,6 @@ class EssenceQueryParametersTest extends TestCase
 
     public function testGetQueryParameter() : void {
         $queryParameters = new EssenceQueryParameters([self::KEY => self::VALUE]);
-        $this->assertEquals(self::VALUE, $queryParameters->get(self::KEY));
+        $this->assertEquals(self::VALUE, $queryParameters->getAsString(self::KEY));
     }
 }

@@ -4,7 +4,7 @@
 namespace Essence\Http\Messages\Response\StartLine;
 
 
-final class EssenceResponseStartLine implements ResponseStartLine
+final class EssenceResponseStartLine implements EssenceResponseStartLineInterface
 {
     private string $protocol;
 

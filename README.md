@@ -23,13 +23,12 @@ to get all the great benefits of middleware!
 Your local machine will need: 
 
  * Docker
- * Docker Compose
  * Git
 
 After, clone this repository and run:
 
 ```
-docker-compose up
+docker build -t essence ./ && docker run --rm essence && docker image rm essence
 ```
 
 this will run the tests and ensure that everything is in working order!
@@ -48,7 +47,7 @@ use Essence\Http\Endpoints\Methods\Get;
 use Essence\Http\Messages\Headers\EssenceHeader;
 use Essence\Http\Messages\Request\Wrapper\RequestWrapper;
 use Essence\Http\Messages\Response\Wrapper\EssenceResponseWrapper;
-use Essence\Http\Messages\Response\Wrapper\ResponseWrapper;
+use Essence\Http\Messages\Response\Wrapper\EssenceResponseWrapperInterface;
 
 Essence::define(new class(42) implements Get {
     /** @var int */
@@ -59,7 +58,7 @@ Essence::define(new class(42) implements Get {
         $this->dependencyInjectedInteger = $dependencyInjectedInteger;
     }
 
-    public function get(RequestWrapper $requestWrapper): ResponseWrapper
+    public function get(RequestWrapper $requestWrapper): EssenceResponseWrapperInterface
     {
         $userId = $requestWrapper->queryParameterAsInt('userId');
         $header = new EssenceHeader('X-Essence', 'Vanilla PHP Framework');

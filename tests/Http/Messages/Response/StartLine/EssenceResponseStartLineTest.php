@@ -15,18 +15,19 @@ class EssenceResponseStartLineTest extends TestCase
 
     private const PROTOCOL_VERSION = 'HTTP/1.0';
 
-    public function testGetProtocol() {
-        $startLine = new EssenceResponseStartLine(self::PROTOCOL_VERSION, self::STATUS_CODE, self::STATUS_TEXT);
-        $this->assertEquals(self::PROTOCOL_VERSION, $startLine->getProtocol());
+    public function testGetProtocol(): void {
+        $this->assertEquals(self::PROTOCOL_VERSION, $this->getEssenceResponseStartLine()->getProtocol());
     }
 
-    public function testGetStatusCode() {
-        $startLine = new EssenceResponseStartLine(self::PROTOCOL_VERSION, self::STATUS_CODE, self::STATUS_TEXT);
-        $this->assertEquals(self::STATUS_CODE, $startLine->getStatusCode());
+    public function testGetStatusCode(): void {
+        $this->assertEquals(self::STATUS_CODE, $this->getEssenceResponseStartLine()->getStatusCode());
     }
 
-    public function testGetStatusText() {
-        $startLine = new EssenceResponseStartLine(self::PROTOCOL_VERSION, self::STATUS_CODE, self::STATUS_TEXT);
-        $this->assertEquals(self::STATUS_TEXT, $startLine->getStatusText());
+    public function testGetStatusText(): void {
+        $this->assertEquals(self::STATUS_TEXT, $this->getEssenceResponseStartLine()->getStatusText());
+    }
+
+    private function getEssenceResponseStartLine(): EssenceResponseStartLine {
+        return new EssenceResponseStartLine(self::PROTOCOL_VERSION, self::STATUS_CODE, self::STATUS_TEXT);
     }
 }

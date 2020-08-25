@@ -4,7 +4,7 @@
 namespace Essence\Http\Messages\Headers;
 
 
-final class EssenceHeader implements Header
+final class EssenceHeader implements EssenceHeaderInterface
 {
     private string $name;
 

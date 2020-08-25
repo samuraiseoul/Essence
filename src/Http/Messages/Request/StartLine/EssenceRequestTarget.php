@@ -4,13 +4,13 @@
 namespace Essence\Http\Messages\Request\StartLine;
 
 
-final class EssenceRequestTarget implements RequestTarget
+final class EssenceRequestTarget implements EssenceRequestTargetInterface
 {
     private string $path;
 
-    private QueryParameters $queryStrings;
+    private EssenceQueryParametersInterface $queryStrings;
 
-    public function __construct(string $path, QueryParameters $queryStrings)
+    public function __construct(string $path, EssenceQueryParametersInterface $queryStrings)
     {
         $this->path = $path;
         $this->queryStrings = $queryStrings;
@@ -21,7 +21,7 @@ final class EssenceRequestTarget implements RequestTarget
         return $this->path;
     }
 
-    public function getQueryStrings(): QueryParameters
+    public function getQueryStrings(): EssenceQueryParametersInterface
     {
         return $this->queryStrings;
     }

@@ -4,7 +4,7 @@
 namespace Essence\Http\Messages\Request\StartLine;
 
 
-final class EssenceQueryParameters implements QueryParameters
+final class EssenceQueryParameters implements EssenceQueryParametersInterface
 {
     /** @var string[] */
     private array $queryParameters;

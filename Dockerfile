@@ -16,8 +16,6 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN composer install
 
-CMD ["composer", "dump-autoload", "-o"]
+RUN composer dump-autoload -o
 
-#RUN composer dump-autoload -o
-
-#CMD ["composer", "test"]
+CMD ["composer", "test"]

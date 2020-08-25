@@ -4,8 +4,8 @@
 namespace Essence\Tests\Http\Messages\Request\StartLine;
 
 
+use Essence\Http\Messages\Request\StartLine\EssenceQueryParametersInterface;
 use Essence\Http\Messages\Request\StartLine\EssenceRequestTarget;
-use Essence\Http\Messages\Request\StartLine\QueryParameters;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -22,16 +22,16 @@ class EssenceRequestTargetTest extends TestCase
 
     public function testQueryParameters() : void {
         $requestTarget = new EssenceRequestTarget($this->getFakePath(), $this->getQueryParametersMock());
-        $this->assertEquals(self::QUERY_PARAMETER_VALUE, $requestTarget->getQueryStrings()->get(self::QUERY_PARAMETER_KEY));
+        $this->assertEquals(self::QUERY_PARAMETER_VALUE, $requestTarget->getQueryStrings()->getAsString(self::QUERY_PARAMETER_KEY));
     }
 
     /**
-     * @return MockObject | QueryParameters
+     * @return MockObject | EssenceQueryParametersInterface
      * @throws ReflectionException
      */
     public function getQueryParametersMock() : MockObject {
-        $queryParametersMock = $this->createMock(QueryParameters::class);
-        $queryParametersMock->method('get')
+        $queryParametersMock = $this->createMock(EssenceQueryParametersInterface::class);
+        $queryParametersMock->method('getAsString')
             ->with(self::QUERY_PARAMETER_KEY)
             ->willReturn(self::QUERY_PARAMETER_VALUE);
         return $queryParametersMock;

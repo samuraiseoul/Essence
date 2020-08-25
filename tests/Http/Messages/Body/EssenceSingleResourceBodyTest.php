@@ -4,7 +4,7 @@
 namespace Http\Messages\Request\Body;
 
 
-use Essence\Http\Messages\Body\EssenceSingleResourceRequestBody;
+use Essence\Http\Messages\Body\Request\EssenceSingleResourceRequestBody;
 use PHPUnit\Framework\TestCase;
 
 class EssenceSingleResourceBodyTest extends TestCase
@@ -16,7 +16,8 @@ class EssenceSingleResourceBodyTest extends TestCase
     ];
 
     public function testGetSingleResourceBody() : void {
-        $singleResourceBody = new EssenceSingleResourceRequestBody(json_encode(self::PRE_SERIALIZED_JSON));
-        $this->assertEquals(json_encode(self::PRE_SERIALIZED_JSON), $singleResourceBody->getContents());
+        $jsonBody = json_encode(self::PRE_SERIALIZED_JSON, JSON_THROW_ON_ERROR, 512);
+        $singleResourceBody = new EssenceSingleResourceRequestBody($jsonBody);
+        $this->assertEquals($jsonBody, $singleResourceBody->getContents());
     }
 }

@@ -3,42 +3,42 @@
 
 namespace Essence\Http\Messages\Response;
 
-use Essence\Http\Messages\Body\Body;
-use Essence\Http\Messages\Headers\Headers;
-use Essence\Http\Messages\Response\StartLine\ResponseStartLine;
-use Essence\Http\Messages\StartLine;
+use Essence\Http\Messages\Body\EssenceBodyInterface;
+use Essence\Http\Messages\Headers\EssenceHeadersInterface;
+use Essence\Http\Messages\Response\StartLine\EssenceResponseStartLineInterface;
+use Essence\Http\Messages\EssenceStartLineInterface;
 
-final class EssenceResponse implements Response
+final class EssenceResponse implements EssenceResponseInterface
 {
-    private ResponseStartLine $startLine;
+    private EssenceResponseStartLineInterface $startLine;
 
-    private Headers $headers;
+    private EssenceHeadersInterface $headers;
 
-    private Body $body;
+    private EssenceBodyInterface $body;
 
-    public function __construct(ResponseStartLine $startLine, Headers $headers, Body $body)
+    public function __construct(EssenceResponseStartLineInterface $startLine, EssenceHeadersInterface $headers, EssenceBodyInterface $body)
     {
         $this->startLine = $startLine;
         $this->headers = $headers;
         $this->body = $body;
     }
 
-    public function getStartLine(): StartLine
+    public function getStartLine(): EssenceStartLineInterface
     {
         return $this->getResponseStartLine();
     }
 
-    public function getHeaders(): Headers
+    public function getHeaders(): EssenceHeadersInterface
     {
         return $this->headers;
     }
 
-    public function getBody(): Body
+    public function getBody(): EssenceBodyInterface
     {
         return $this->body;
     }
 
-    public function getResponseStartLine(): ResponseStartLine
+    public function getResponseStartLine(): EssenceResponseStartLineInterface
     {
         return $this->startLine;
     }

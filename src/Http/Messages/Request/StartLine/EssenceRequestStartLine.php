@@ -7,15 +7,15 @@ namespace Essence\Http\Messages\Request\StartLine;
 use Essence\Helpers\Rest\RestConstants;
 use InvalidArgumentException;
 
-final class EssenceRequestStartLine implements RequestStartLine
+final class EssenceRequestStartLine implements EssenceRequestStartLineInterface
 {
     private string $httpMethod;
 
-    private RequestTarget $requestTarget;
+    private EssenceRequestTargetInterface $requestTarget;
 
     private string $httpVersion;
 
-    public function __construct(string $httpMethod, RequestTarget $requestTarget, string $httpVersion)
+    public function __construct(string $httpMethod, EssenceRequestTargetInterface $requestTarget, string $httpVersion)
     {
         $this->validateHttpMethod($httpMethod);
         $this->httpMethod = $httpMethod;
@@ -28,7 +28,7 @@ final class EssenceRequestStartLine implements RequestStartLine
         return $this->httpMethod;
     }
 
-    public function getRequestTarget(): RequestTarget
+    public function getRequestTarget(): EssenceRequestTargetInterface
     {
         return $this->requestTarget;
     }

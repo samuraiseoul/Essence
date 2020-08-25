@@ -2,10 +2,10 @@
 
 namespace Essence\Http\Endpoints\Methods;
 
-use Essence\Http\Messages\Request\Wrapper\RequestWrapper;
-use Essence\Http\Messages\Response\Wrapper\ResponseWrapper;
+use Essence\Http\Messages\Request\Wrapper\EssenceRequestWrapperInterface;
+use Essence\Http\Messages\Response\Wrapper\EssenceResponseWrapperInterface;
 
 interface Post extends RestVerb
 {
-    public function post(RequestWrapper $request) : ResponseWrapper;
+    public function post(EssenceRequestWrapperInterface $request) : EssenceResponseWrapperInterface;
 }

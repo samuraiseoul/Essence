@@ -4,12 +4,12 @@
 namespace Essence\Http\Messages\Headers;
 
 
-final class EssenceHeaders implements Headers
+final class EssenceHeaders implements EssenceHeadersInterface
 {
-    /** @var Header[] */
+    /** @var EssenceHeaderInterface[] */
     private array $headers;
 
-    /** @param Header[] $headers */
+    /** @param EssenceHeaderInterface[] $headers */
     public function __construct(array $headers)
     {
         $mappedHeaders = [];
@@ -19,13 +19,13 @@ final class EssenceHeaders implements Headers
         $this->headers = $mappedHeaders;
     }
 
-    public function get(string $headerName): Header
+    public function get(string $headerName): EssenceHeaderInterface
     {
         return $this->headers[$headerName];
     }
 
     /**
-     * @return Header[]
+     * @return EssenceHeaderInterface[]
      */
     public function all(): array
     {

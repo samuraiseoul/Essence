@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Essence\Tests\Http\Messages\Request\Headers;
+namespace Essence\Tests\Http\Messages\Headers;
 
 
 use Essence\Http\Messages\Headers\EssenceHeader;

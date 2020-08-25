@@ -4,10 +4,10 @@
 namespace Essence\Tests\Http\Messages\Request;
 
 
-use Essence\Http\Messages\Body\Body;
-use Essence\Http\Messages\Headers\Headers;
+use Essence\Http\Messages\Body\EssenceBodyInterface;
+use Essence\Http\Messages\Headers\EssenceHeadersInterface;
 use Essence\Http\Messages\Request\EssenceRequest;
-use Essence\Http\Messages\Request\StartLine\RequestStartLine;
+use Essence\Http\Messages\Request\StartLine\EssenceRequestStartLineInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -33,26 +33,26 @@ class EssenceRequestTest extends TestCase
     }
 
     /**
-     * @return MockObject | RequestStartLine
+     * @return MockObject | EssenceRequestStartLineInterface
      * @throws ReflectionException
      */
     private function getMockStartLine() {
-        return $this->createMock(RequestStartLine::class);
+        return $this->createMock(EssenceRequestStartLineInterface::class);
     }
 
     /**
-     * @return MockObject | Headers
+     * @return MockObject | EssenceHeadersInterface
      * @throws ReflectionException
      */
     private function getMockHeaders() {
-        return $this->createMock(Headers::class);
+        return $this->createMock(EssenceHeadersInterface::class);
     }
 
     /**
-     * @return MockObject | Body
+     * @return MockObject | EssenceBodyInterface
      * @throws ReflectionException
      */
     private function getMockBody() {
-        return $this->createMock(Body::class);
+        return $this->createMock(EssenceBodyInterface::class);
     }
 }

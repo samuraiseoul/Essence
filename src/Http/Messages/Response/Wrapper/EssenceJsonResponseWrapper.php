@@ -4,15 +4,15 @@
 namespace Essence\Http\Messages\Response\Wrapper;
 
 
-use Essence\Http\Messages\Headers\Headers;
+use Essence\Http\Messages\Headers\EssenceHeadersInterface;
 
-final class EssenceJsonResponseWrapper implements ResponseWrapper
+final class EssenceJsonResponseWrapper implements EssenceResponseWrapperInterface
 {
-    private ?Headers $headers;
+    private ?EssenceHeadersInterface $headers;
 
     private string $jsonBody;
 
-    public function __construct(string $jsonBody, ?Headers $headers = null)
+    public function __construct(string $jsonBody, ?EssenceHeadersInterface $headers = null)
     {
         $this->headers = $headers;
         $this->jsonBody = $jsonBody;
@@ -20,7 +20,7 @@ final class EssenceJsonResponseWrapper implements ResponseWrapper
     }
 
 
-    public function getHeaders(): ?Headers
+    public function getHeaders(): ?EssenceHeadersInterface
     {
         return $this->headers;
     }

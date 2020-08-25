@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Essence\Tests\Http\Messages\Request\Headers;
+namespace Essence\Tests\Http\Messages\Headers;
 
 
 use Essence\Http\Messages\Headers\EssenceHeaders;
-use Essence\Http\Messages\Headers\Header;
+use Essence\Http\Messages\Headers\EssenceHeaderInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -27,11 +27,11 @@ class EssenceHeadersTest extends TestCase
     }
 
     /**
-     * @return MockObject | Header
+     * @return MockObject | EssenceHeaderInterface
      * @throws ReflectionException
      */
     private function createHeader() {
-        $header = $this->createMock(Header::class);
+        $header = $this->createMock(EssenceHeaderInterface::class);
         $header->method('getHeaderName')->willReturn(self::HEADER_NAME);
         $header->method('getHeaderValue')->willReturn(self::HEADER_VALUE);
         return $header;

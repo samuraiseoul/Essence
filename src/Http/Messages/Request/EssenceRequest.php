@@ -3,42 +3,42 @@
 namespace Essence\Http\Messages\Request;
 
 
-use Essence\Http\Messages\Body\Body;
-use Essence\Http\Messages\Headers\Headers;
-use Essence\Http\Messages\Request\StartLine\RequestStartLine;
-use Essence\Http\Messages\StartLine;
+use Essence\Http\Messages\Body\EssenceBodyInterface;
+use Essence\Http\Messages\Headers\EssenceHeadersInterface;
+use Essence\Http\Messages\Request\StartLine\EssenceRequestStartLineInterface;
+use Essence\Http\Messages\EssenceStartLineInterface;
 
-final class EssenceRequest implements Request
+final class EssenceRequest implements EssenceRequestInterface
 {
-    private RequestStartLine $startLine;
+    private EssenceRequestStartLineInterface $startLine;
 
-    private Headers $headers;
+    private EssenceHeadersInterface $headers;
 
-    private Body $body;
+    private EssenceBodyInterface $body;
 
-    public function __construct(RequestStartLine $startLine, Headers $headers, Body $body)
+    public function __construct(EssenceRequestStartLineInterface $startLine, EssenceHeadersInterface $headers, EssenceBodyInterface $body)
     {
         $this->startLine = $startLine;
         $this->headers = $headers;
         $this->body = $body;
     }
 
-    public function getStartLine(): StartLine
+    public function getStartLine(): EssenceStartLineInterface
     {
         return $this->getRequestStartLine();
     }
 
-    public function getHeaders(): Headers
+    public function getHeaders(): EssenceHeadersInterface
     {
         return $this->headers;
     }
 
-    public function getBody(): Body
+    public function getBody(): EssenceBodyInterface
     {
         return $this->body;
     }
 
-    public function getRequestStartLine(): RequestStartLine
+    public function getRequestStartLine(): EssenceRequestStartLineInterface
     {
         return $this->startLine;
     }
